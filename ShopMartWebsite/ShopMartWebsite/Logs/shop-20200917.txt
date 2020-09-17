@@ -1,0 +1,839 @@
+2020-09-17T14:50:00.3002957+07:00  [INF] Entity Framework Core "2.2.0-rtm-35687" initialized '"ShopDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-09-17T14:50:07.7241849+07:00  [INF] Executed DbCommand ("3,612"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE') SELECT 1 ELSE SELECT 0" (0723d8ff)
+2020-09-17T14:50:09.8401119+07:00  [INF] Executed DbCommand ("1,161"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [AspNetRoles] AS [a])
+    THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT)
+END" (0723d8ff)
+2020-09-17T14:50:10.4294239+07:00  [INF] Executed DbCommand ("122"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [AspNetUsers] AS [u]
+        WHERE [u].[UserName] = N'admin')
+    THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT)
+END" (0723d8ff)
+2020-09-17T14:50:11.9742567+07:00 0HM2QRP725N44:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost:51987/  0 (ca22a1cb)
+2020-09-17T14:50:11.9742568+07:00 0HM2QRP725N45:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/   (ca22a1cb)
+2020-09-17T14:50:12.6499715+07:00 0HM2QRP725N44:00000001 [INF] Request finished in 781.8155ms 200  (791a596a)
+2020-09-17T14:50:15.6896586+07:00 0HM2QRP725N45:00000001 [INF] Executing action method "ShopMartWebsite.Controllers.HomeController.Index (ShopMartWebsite)" with arguments (["", "", ""]) - ModelState is Valid (ba7f4ac2)
+2020-09-17T14:50:15.7387063+07:00 0HM2QRP725N45:00000001 [INF] Entity Framework Core "2.2.0-rtm-35687" initialized '"ShopDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-09-17T14:50:17.2510351+07:00 0HM2QRP725N45:00000001 [INF] Executed DbCommand ("424"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[id], [x].[amount], [x].[categoryId], [x].[color], [x].[description], [x].[image], [x].[name], [x].[price], [x].[size], [x].[status], [x.category].[id], [x.category].[name], [x.category].[status]
+FROM [product] AS [x]
+LEFT JOIN [category] AS [x.category] ON [x].[categoryId] = [x.category].[id]
+WHERE ([x].[status] = 1) AND ([x].[amount] > 0)
+ORDER BY [x].[categoryId], [x].[id]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2020-09-17T14:50:17.7735356+07:00 0HM2QRP725N45:00000001 [INF] Executed DbCommand ("110"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [x.Comments].[id], [x.Comments].[content], [x.Comments].[createDate], [x.Comments].[productId], [x.Comments].[status], [x.Comments].[userId]
+FROM [comment] AS [x.Comments]
+INNER JOIN (
+    SELECT DISTINCT [t].*
+    FROM (
+        SELECT [x0].[id], [x0].[categoryId]
+        FROM [product] AS [x0]
+        LEFT JOIN [category] AS [x.category0] ON [x0].[categoryId] = [x.category0].[id]
+        WHERE ([x0].[status] = 1) AND ([x0].[amount] > 0)
+        ORDER BY [x0].[categoryId], [x0].[id]
+        OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+    ) AS [t]
+) AS [t0] ON [x.Comments].[productId] = [t0].[id]
+ORDER BY [t0].[categoryId], [t0].[id]" (0723d8ff)
+2020-09-17T14:50:17.9376262+07:00 0HM2QRP725N45:00000001 [INF] Executed DbCommand ("34"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [product] AS [x]
+WHERE ([x].[status] = 1) AND ([x].[amount] > 0)" (0723d8ff)
+2020-09-17T14:50:40.5317621+07:00 0HM2QRP725N45:00000001 [INF] Executing ViewResult, running view at path "/Views/Home/Index.cshtml". (9707eebe)
+2020-09-17T14:50:40.8712093+07:00 0HM2QRP725N45:00000001 [INF] Executed DbCommand ("17"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [cate].[id], [cate].[name], [cate].[status]
+FROM [category] AS [cate]
+ORDER BY [cate].[id]" (0723d8ff)
+2020-09-17T14:50:40.9151656+07:00 0HM2QRP725N45:00000001 [INF] Executed DbCommand ("30"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [cate.Products].[id], [cate.Products].[amount], [cate.Products].[categoryId], [cate.Products].[color], [cate.Products].[description], [cate.Products].[image], [cate.Products].[name], [cate.Products].[price], [cate.Products].[size], [cate.Products].[status]
+FROM [product] AS [cate.Products]
+INNER JOIN (
+    SELECT [cate0].[id]
+    FROM [category] AS [cate0]
+) AS [t] ON [cate.Products].[categoryId] = [t].[id]
+ORDER BY [t].[id]" (0723d8ff)
+2020-09-17T14:50:41.2249980+07:00 0HM2QRP725N45:00000001 [INF] Executed DbCommand ("44"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [cate].[id], [cate].[name], [cate].[status]
+FROM [category] AS [cate]
+ORDER BY [cate].[id]" (0723d8ff)
+2020-09-17T14:50:41.2653345+07:00 0HM2QRP725N45:00000001 [INF] Executed DbCommand ("24"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [cate.Products].[id], [cate.Products].[amount], [cate.Products].[categoryId], [cate.Products].[color], [cate.Products].[description], [cate.Products].[image], [cate.Products].[name], [cate.Products].[price], [cate.Products].[size], [cate.Products].[status]
+FROM [product] AS [cate.Products]
+INNER JOIN (
+    SELECT [cate0].[id]
+    FROM [category] AS [cate0]
+) AS [t] ON [cate.Products].[categoryId] = [t].[id]
+ORDER BY [t].[id]" (0723d8ff)
+2020-09-17T14:50:42.2556551+07:00 0HM2QRP725N45:00000001 [INF] Executed action "ShopMartWebsite.Controllers.HomeController.Index (ShopMartWebsite)" in 26920.1841ms (afa2e885)
+2020-09-17T14:50:42.3136851+07:00 0HM2QRP725N45:00000001 [INF] Request finished in 30519.7367ms 200 text/html; charset=utf-8 (791a596a)
+2020-09-17T14:50:42.5517769+07:00 0HM2QRP725N48:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/css/owl.carousel.min.css   (ca22a1cb)
+2020-09-17T14:50:42.5603300+07:00 0HM2QRP725N47:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/css/bootstrap.css   (ca22a1cb)
+2020-09-17T14:50:42.5991103+07:00 0HM2QRP725N46:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/css/all.css   (ca22a1cb)
+2020-09-17T14:50:42.6012544+07:00 0HM2QRP725N44:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/css/style.css   (ca22a1cb)
+2020-09-17T14:50:42.6070712+07:00 0HM2QRP725N45:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/css/slick.css   (ca22a1cb)
+2020-09-17T14:50:42.6630181+07:00 0HM2QRP725N46:00000001 [INF] Sending file. Request path: '"/user/css/all.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\css\all.css"' (27b0a520)
+2020-09-17T14:50:42.6672409+07:00 0HM2QRP725N48:00000001 [INF] Sending file. Request path: '"/user/css/owl.carousel.min.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\css\owl.carousel.min.css"' (27b0a520)
+2020-09-17T14:50:42.6714042+07:00 0HM2QRP725N47:00000001 [INF] Sending file. Request path: '"/user/css/bootstrap.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\css\bootstrap.css"' (27b0a520)
+2020-09-17T14:50:42.6752002+07:00 0HM2QRP725N44:00000002 [INF] Sending file. Request path: '"/user/css/style.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\css\style.css"' (27b0a520)
+2020-09-17T14:50:42.6787594+07:00 0HM2QRP725N45:00000002 [INF] Sending file. Request path: '"/user/css/slick.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\css\slick.css"' (27b0a520)
+2020-09-17T14:50:42.8509381+07:00 0HM2QRP725N48:00000001 [INF] Request finished in 305.1493ms 200 text/css (791a596a)
+2020-09-17T14:50:42.8876484+07:00 0HM2QRP725N49:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/css/aos.css   (ca22a1cb)
+2020-09-17T14:50:42.9400237+07:00 0HM2QRP725N49:00000001 [INF] Sending file. Request path: '"/user/css/aos.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\css\aos.css"' (27b0a520)
+2020-09-17T14:50:42.9612323+07:00 0HM2QRP725N44:00000002 [INF] Request finished in 306.8374ms 200 text/css (791a596a)
+2020-09-17T14:50:42.9826691+07:00 0HM2QRP725N48:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/css/fonts.css   (ca22a1cb)
+2020-09-17T14:50:43.0240765+07:00 0HM2QRP725N4A:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/content/vendor/jquery/jquery.min.js   (ca22a1cb)
+2020-09-17T14:50:43.0364421+07:00 0HM2QRP725N48:00000002 [INF] Sending file. Request path: '"/user/css/fonts.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\css\fonts.css"' (27b0a520)
+2020-09-17T14:50:43.0956861+07:00 0HM2QRP725N4A:00000001 [INF] Sending file. Request path: '"/content/vendor/jquery/jquery.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\content\vendor\jquery\jquery.min.js"' (27b0a520)
+2020-09-17T14:50:43.1037751+07:00 0HM2QRP725N4B:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/css/owl.theme.default.min.css   (ca22a1cb)
+2020-09-17T14:50:43.2101900+07:00 0HM2QRP725N4B:00000001 [INF] Sending file. Request path: '"/user/css/owl.theme.default.min.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\css\owl.theme.default.min.css"' (27b0a520)
+2020-09-17T14:50:43.2162342+07:00 0HM2QRP725N48:00000002 [INF] Request finished in 211.7499ms 200 text/css (791a596a)
+2020-09-17T14:50:43.2335773+07:00 0HM2QRP725N44:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/css/cart.css   (ca22a1cb)
+2020-09-17T14:50:43.2388953+07:00 0HM2QRP725N45:00000002 [INF] Request finished in 306.8367ms 200 text/css (791a596a)
+2020-09-17T14:50:43.4315782+07:00 0HM2QRP725N49:00000001 [INF] Request finished in 415.1346ms 200 text/css (791a596a)
+2020-09-17T14:50:43.4902487+07:00 0HM2QRP725N46:00000001 [INF] Request finished in 830.7558ms 200 text/css (791a596a)
+2020-09-17T14:50:43.4996872+07:00 0HM2QRP725N4B:00000001 [INF] Request finished in 221.3704ms 200 text/css (791a596a)
+2020-09-17T14:50:43.5290608+07:00 0HM2QRP725N44:00000003 [INF] Sending file. Request path: '"/user/css/cart.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\css\cart.css"' (27b0a520)
+2020-09-17T14:50:43.5331527+07:00 0HM2QRP725N47:00000001 [INF] Request finished in 994.0572ms 200 text/css (791a596a)
+2020-09-17T14:50:43.5375296+07:00 0HM2QRP725N4A:00000001 [INF] Request finished in 556.4473ms 200 application/javascript (791a596a)
+2020-09-17T14:50:43.6584327+07:00 0HM2QRP725N44:00000003 [INF] Request finished in 519.7745ms 200 text/css (791a596a)
+2020-09-17T14:50:43.6635654+07:00 0HM2QRP725N45:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/css/detailproduct.css   (ca22a1cb)
+2020-09-17T14:50:43.6738176+07:00 0HM2QRP725N45:00000003 [INF] Sending file. Request path: '"/user/css/detailproduct.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\css\detailproduct.css"' (27b0a520)
+2020-09-17T14:50:43.6836295+07:00 0HM2QRP725N45:00000003 [INF] Request finished in 54.0404ms 200 text/css (791a596a)
+2020-09-17T14:50:43.8311341+07:00 0HM2QRP725N48:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/js/owl.carousel.min.js   (ca22a1cb)
+2020-09-17T14:50:43.8352301+07:00 0HM2QRP725N49:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/js/jquery3.4.1.min.js   (ca22a1cb)
+2020-09-17T14:50:43.8823214+07:00 0HM2QRP725N49:00000002 [INF] Sending file. Request path: '"/user/js/jquery3.4.1.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\js\jquery3.4.1.min.js"' (27b0a520)
+2020-09-17T14:50:43.8846708+07:00 0HM2QRP725N48:00000003 [INF] Sending file. Request path: '"/user/js/owl.carousel.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\js\owl.carousel.min.js"' (27b0a520)
+2020-09-17T14:50:44.3029651+07:00 0HM2QRP725N4B:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/js/main.js   (ca22a1cb)
+2020-09-17T14:50:44.3138958+07:00 0HM2QRP725N47:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/js/slick.min.js   (ca22a1cb)
+2020-09-17T14:50:44.3213130+07:00 0HM2QRP725N4A:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/js/aos.js   (ca22a1cb)
+2020-09-17T14:50:44.3449137+07:00 0HM2QRP725N4B:00000002 [INF] Sending file. Request path: '"/user/js/main.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\js\main.js"' (27b0a520)
+2020-09-17T14:50:44.3492599+07:00 0HM2QRP725N47:00000002 [INF] Sending file. Request path: '"/user/js/slick.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\js\slick.min.js"' (27b0a520)
+2020-09-17T14:50:44.3558408+07:00 0HM2QRP725N4A:00000002 [INF] Sending file. Request path: '"/user/js/aos.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\js\aos.js"' (27b0a520)
+2020-09-17T14:50:44.3743202+07:00 0HM2QRP725N46:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/logo/logo.jpg   (ca22a1cb)
+2020-09-17T14:50:44.5188614+07:00 0HM2QRP725N4A:00000002 [INF] Request finished in 190.1106ms 200 application/javascript (791a596a)
+2020-09-17T14:50:44.5315053+07:00 0HM2QRP725N47:00000002 [INF] Request finished in 190.5276ms 200 application/javascript (791a596a)
+2020-09-17T14:50:44.8194653+07:00 0HM2QRP725N45:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/Banner/banner-1.jpg   (ca22a1cb)
+2020-09-17T14:50:44.8374349+07:00 0HM2QRP725N4D:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/Banner/banner-2.webp   (ca22a1cb)
+2020-09-17T14:50:45.0218311+07:00 0HM2QRP725N45:00000004 [INF] Sending file. Request path: '"/user/assets/Banner/banner-1.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\Banner\banner-1.jpg"' (27b0a520)
+2020-09-17T14:50:45.0989193+07:00 0HM2QRP725N4D:00000001 [INF] Sending file. Request path: '"/user/assets/Banner/banner-2.webp"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\Banner\banner-2.webp"' (27b0a520)
+2020-09-17T14:50:45.1100481+07:00 0HM2QRP725N44:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/js/bootstrap.js   (ca22a1cb)
+2020-09-17T14:50:45.1154683+07:00 0HM2QRP725N46:00000002 [INF] Sending file. Request path: '"/user/assets/logo/logo.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\logo\logo.jpg"' (27b0a520)
+2020-09-17T14:50:45.1270924+07:00 0HM2QRP725N44:00000004 [INF] Sending file. Request path: '"/user/js/bootstrap.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\js\bootstrap.js"' (27b0a520)
+2020-09-17T14:50:45.3773748+07:00 0HM2QRP725N4E:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/Banner/banner-3.webp   (ca22a1cb)
+2020-09-17T14:50:45.3791400+07:00 0HM2QRP725N4C:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/MiniBanner/banner-mini1.png   (ca22a1cb)
+2020-09-17T14:50:45.7678710+07:00 0HM2QRP725N4C:00000001 [INF] Sending file. Request path: '"/user/assets/MiniBanner/banner-mini1.png"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\MiniBanner\banner-mini1.png"' (27b0a520)
+2020-09-17T14:50:45.7714034+07:00 0HM2QRP725N4E:00000001 [INF] Sending file. Request path: '"/user/assets/Banner/banner-3.webp"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\Banner\banner-3.webp"' (27b0a520)
+2020-09-17T14:50:45.7798846+07:00 0HM2QRP725N4L:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/images/site/484ffee4-bbea-4229-ba6b-b628f16ff3a8.jpg   (ca22a1cb)
+2020-09-17T14:50:45.7822274+07:00 0HM2QRP725N4H:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/instagram/anh66.jpg   (ca22a1cb)
+2020-09-17T14:50:45.8152578+07:00 0HM2QRP725N4L:00000001 [INF] Sending file. Request path: '"/images/site/484ffee4-bbea-4229-ba6b-b628f16ff3a8.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\images\site\484ffee4-bbea-4229-ba6b-b628f16ff3a8.jpg"' (27b0a520)
+2020-09-17T14:50:45.8236868+07:00 0HM2QRP725N4H:00000001 [INF] Sending file. Request path: '"/user/assets/instagram/anh66.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\instagram\anh66.jpg"' (27b0a520)
+2020-09-17T14:50:45.8478259+07:00 0HM2QRP725N4N:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/images/site/167ab4ca-c83a-422e-ac39-413bc9f4e92f.jpg   (ca22a1cb)
+2020-09-17T14:50:45.8555380+07:00 0HM2QRP725N4Q:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/images/site/b72117e0-d277-4a55-a0c9-79d86d642b8a.jpg   (ca22a1cb)
+2020-09-17T14:50:45.9265027+07:00 0HM2QRP725N4Q:00000001 [INF] Sending file. Request path: '"/images/site/b72117e0-d277-4a55-a0c9-79d86d642b8a.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\images\site\b72117e0-d277-4a55-a0c9-79d86d642b8a.jpg"' (27b0a520)
+2020-09-17T14:50:45.9448309+07:00 0HM2QRP725N4N:00000001 [INF] Sending file. Request path: '"/images/site/167ab4ca-c83a-422e-ac39-413bc9f4e92f.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\images\site\167ab4ca-c83a-422e-ac39-413bc9f4e92f.jpg"' (27b0a520)
+2020-09-17T14:50:45.9727833+07:00 0HM2QRP725N4H:00000001 [INF] Request finished in 514.3208ms 200 image/jpeg (791a596a)
+2020-09-17T14:50:45.9795069+07:00 0HM2QRP725N4L:00000001 [INF] Request finished in 112.4155ms 200 image/jpeg (791a596a)
+2020-09-17T14:50:46.0295941+07:00 0HM2QRP725N4F:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/MiniBanner/banner-mini3.png   (ca22a1cb)
+2020-09-17T14:50:46.0530886+07:00 0HM2QRP725N4Q:00000001 [INF] Request finished in 166.4068ms 200 image/jpeg (791a596a)
+2020-09-17T14:50:46.0735453+07:00 0HM2QRP725N4G:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/instagram/anh55.jpg   (ca22a1cb)
+2020-09-17T14:50:46.1218414+07:00 0HM2QRP725N4I:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/images/site/b4b84e7e-4a02-472c-9357-f7396529f533.png   (ca22a1cb)
+2020-09-17T14:50:46.1358621+07:00 0HM2QRP725N4G:00000001 [INF] Sending file. Request path: '"/user/assets/instagram/anh55.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\instagram\anh55.jpg"' (27b0a520)
+2020-09-17T14:50:46.1429075+07:00 0HM2QRP725N4J:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/instagram/anh11.jpg   (ca22a1cb)
+2020-09-17T14:50:46.1634606+07:00 0HM2QRP725N4I:00000001 [INF] Sending file. Request path: '"/images/site/b4b84e7e-4a02-472c-9357-f7396529f533.png"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\images\site\b4b84e7e-4a02-472c-9357-f7396529f533.png"' (27b0a520)
+2020-09-17T14:50:46.1714424+07:00 0HM2QRP725N4J:00000001 [INF] Sending file. Request path: '"/user/assets/instagram/anh11.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\instagram\anh11.jpg"' (27b0a520)
+2020-09-17T14:50:46.1789836+07:00 0HM2QRP725N4F:00000001 [INF] Sending file. Request path: '"/user/assets/MiniBanner/banner-mini3.png"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\MiniBanner\banner-mini3.png"' (27b0a520)
+2020-09-17T14:50:46.2290008+07:00 0HM2QRP725N4G:00000001 [INF] Request finished in 180.0686ms 200 image/jpeg (791a596a)
+2020-09-17T14:50:46.2386227+07:00 0HM2QRP725N4K:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/images/site/11cd7a2e-374f-44f8-86c6-976446961c83.jpg   (ca22a1cb)
+2020-09-17T14:50:46.2619776+07:00 0HM2QRP725N4I:00000001 [INF] Request finished in 204.3007ms 200 image/png (791a596a)
+2020-09-17T14:50:46.2954429+07:00 0HM2QRP725N4K:00000001 [INF] Sending file. Request path: '"/images/site/11cd7a2e-374f-44f8-86c6-976446961c83.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\images\site\11cd7a2e-374f-44f8-86c6-976446961c83.jpg"' (27b0a520)
+2020-09-17T14:50:46.3213864+07:00 0HM2QRP725N4M:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/MiniBanner/banner-mini4.png   (ca22a1cb)
+2020-09-17T14:50:46.4976725+07:00 0HM2QRP725N4M:00000001 [INF] Sending file. Request path: '"/user/assets/MiniBanner/banner-mini4.png"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\MiniBanner\banner-mini4.png"' (27b0a520)
+2020-09-17T14:50:46.5032128+07:00 0HM2QRP725N4O:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/instagram/anh33.jpg   (ca22a1cb)
+2020-09-17T14:50:46.5155143+07:00 0HM2QRP725N4F:00000001 [INF] Request finished in 214.6938ms 200 image/png (791a596a)
+2020-09-17T14:50:46.5248341+07:00 0HM2QRP725N4P:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/MiniBanner/banner-mini2.png   (ca22a1cb)
+2020-09-17T14:50:46.5315455+07:00 0HM2QRP725N4O:00000001 [INF] Sending file. Request path: '"/user/assets/instagram/anh33.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\instagram\anh33.jpg"' (27b0a520)
+2020-09-17T14:50:46.5527415+07:00 0HM2QRP725N4P:00000001 [INF] Sending file. Request path: '"/user/assets/MiniBanner/banner-mini2.png"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\MiniBanner\banner-mini2.png"' (27b0a520)
+2020-09-17T14:50:46.6250710+07:00 0HM2QRP725N4M:00000001 [INF] Request finished in 306.7266ms 200 image/png (791a596a)
+2020-09-17T14:50:46.6383007+07:00 0HM2QRP725N4R:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/images/site/faf0142b-aa8d-4d4f-80a0-d5d03eec9446.jpg   (ca22a1cb)
+2020-09-17T14:50:46.7224010+07:00 0HM2QRP725N4S:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/images/site/792b5f52-efea-44f8-8886-6fff975eb77a.jpg   (ca22a1cb)
+2020-09-17T14:50:46.7576227+07:00 0HM2QRP725N4P:00000001 [INF] Request finished in 281.4615ms 200 image/png (791a596a)
+2020-09-17T14:50:46.7641859+07:00 0HM2QRP725N4O:00000001 [INF] Request finished in 317.4996ms 200 image/jpeg (791a596a)
+2020-09-17T14:50:46.8261308+07:00 0HM2QRP725N4S:00000001 [INF] Sending file. Request path: '"/images/site/792b5f52-efea-44f8-8886-6fff975eb77a.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\images\site\792b5f52-efea-44f8-8886-6fff975eb77a.jpg"' (27b0a520)
+2020-09-17T14:50:46.8595306+07:00 0HM2QRP725N4T:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/images/site/1848d93b-56c6-4716-bd89-bc8e04985b1c.jpg   (ca22a1cb)
+2020-09-17T14:50:46.8703565+07:00 0HM2QRP725N48:00000003 [INF] Request finished in 2997.7621ms 200 application/javascript (791a596a)
+2020-09-17T14:50:46.8880708+07:00 0HM2QRP725N4T:00000001 [INF] Sending file. Request path: '"/images/site/1848d93b-56c6-4716-bd89-bc8e04985b1c.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\images\site\1848d93b-56c6-4716-bd89-bc8e04985b1c.jpg"' (27b0a520)
+2020-09-17T14:50:46.9015108+07:00 0HM2QRP725N4R:00000001 [INF] Sending file. Request path: '"/images/site/faf0142b-aa8d-4d4f-80a0-d5d03eec9446.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\images\site\faf0142b-aa8d-4d4f-80a0-d5d03eec9446.jpg"' (27b0a520)
+2020-09-17T14:50:47.4153701+07:00 0HM2QRP725N4B:00000002 [INF] Request finished in 2896.5449ms 200 application/javascript (791a596a)
+2020-09-17T14:50:47.9725382+07:00 0HM2QRP725N4T:00000001 [INF] Request finished in 262.9578ms 200 image/jpeg (791a596a)
+2020-09-17T14:50:48.0263415+07:00 0HM2QRP725N4V:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/instagram/anh1.jpg   (ca22a1cb)
+2020-09-17T14:50:48.5029905+07:00 0HM2QRP725N49:00000002 [INF] Request finished in 4160.1116ms 200 application/javascript (791a596a)
+2020-09-17T14:50:48.5232991+07:00 0HM2QRP725N4V:00000001 [INF] Sending file. Request path: '"/user/assets/instagram/anh1.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\instagram\anh1.jpg"' (27b0a520)
+2020-09-17T14:50:48.6303841+07:00 0HM2QRP725N4U:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/instagram/anh44.jpg   (ca22a1cb)
+2020-09-17T14:50:48.6691225+07:00 0HM2QRP725N46:00000002 [INF] Request finished in 2900.5702ms 200 image/jpeg (791a596a)
+2020-09-17T14:50:48.7138022+07:00 0HM2QRP725N4U:00000001 [INF] Sending file. Request path: '"/user/assets/instagram/anh44.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\instagram\anh44.jpg"' (27b0a520)
+2020-09-17T14:50:48.7392280+07:00 0HM2QRP725N4A:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/webfonts/fa-solid-900.woff2   (ca22a1cb)
+2020-09-17T14:50:48.7499136+07:00 0HM2QRP725N4V:00000001 [INF] Request finished in 1813.8693ms 200 image/jpeg (791a596a)
+2020-09-17T14:50:48.7988888+07:00 0HM2QRP725N4A:00000003 [INF] Sending file. Request path: '"/user/webfonts/fa-solid-900.woff2"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\webfonts\fa-solid-900.woff2"' (27b0a520)
+2020-09-17T14:50:48.8350665+07:00 0HM2QRP725N4U:00000001 [INF] Request finished in 1877.9287ms 200 image/jpeg (791a596a)
+2020-09-17T14:50:48.8378835+07:00 0HM2QRP725N47:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/fonts/Lexend_Deca/LexendDeca-Regular.ttf   (ca22a1cb)
+2020-09-17T14:50:48.8762468+07:00 0HM2QRP725N47:00000003 [INF] Sending file. Request path: '"/user/fonts/Lexend_Deca/LexendDeca-Regular.ttf"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\fonts\Lexend_Deca\LexendDeca-Regular.ttf"' (27b0a520)
+2020-09-17T14:50:48.8887686+07:00 0HM2QRP725N50:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/webfonts/fa-brands-400.woff2   (ca22a1cb)
+2020-09-17T14:50:49.0116754+07:00 0HM2QRP725N4R:00000001 [INF] Request finished in 1015.684ms 200 image/jpeg (791a596a)
+2020-09-17T14:50:49.1333388+07:00 0HM2QRP725N50:00000001 [INF] Sending file. Request path: '"/user/webfonts/fa-brands-400.woff2"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\webfonts\fa-brands-400.woff2"' (27b0a520)
+2020-09-17T14:50:49.7375335+07:00 0HM2QRP725N47:00000003 [INF] Request finished in 2164.9804ms 200 application/x-font-ttf (791a596a)
+2020-09-17T14:50:49.7702059+07:00 0HM2QRP725N50:00000001 [INF] Request finished in 2462.12ms 200 font/woff2 (791a596a)
+2020-09-17T14:50:49.8324398+07:00 0HM2QRP725N4A:00000003 [INF] Request finished in 2645.0551ms 200 font/woff2 (791a596a)
+2020-09-17T14:50:49.8445734+07:00 0HM2QRP725N4C:00000001 [INF] Request finished in 1721.6776ms 200 image/png (791a596a)
+2020-09-17T14:50:49.8928435+07:00 0HM2QRP725N4S:00000001 [INF] Request finished in 1148.6697ms 200 image/jpeg (791a596a)
+2020-09-17T14:50:49.9042866+07:00 0HM2QRP725N4D:00000001 [INF] Request finished in 2966.2993ms 200 image/webp (791a596a)
+2020-09-17T14:50:50.2139393+07:00 0HM2QRP725N4K:00000001 [INF] Request finished in 1389.7532ms 200 image/jpeg (791a596a)
+2020-09-17T14:50:50.2982893+07:00 0HM2QRP725N4N:00000001 [INF] Request finished in 2026.7886ms 200 image/jpeg (791a596a)
+2020-09-17T14:50:50.3742947+07:00 0HM2QRP725N4E:00000001 [INF] Request finished in 2458.3184ms 200 image/webp (791a596a)
+2020-09-17T14:50:50.3814273+07:00 0HM2QRP725N45:00000004 [INF] Request finished in 3071.4754ms 200 image/jpeg (791a596a)
+2020-09-17T14:50:50.4212645+07:00 0HM2QRP725N4J:00000001 [INF] Request finished in 1484.8339ms 200 image/jpeg (791a596a)
+2020-09-17T14:50:50.4331688+07:00 0HM2QRP725N44:00000004 [INF] Request finished in 3324.27ms 200 application/javascript (791a596a)
+2020-09-17T14:50:56.5693697+07:00 0HM2QRP725N4H:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/favicon.ico   (ca22a1cb)
+2020-09-17T14:50:56.5827924+07:00 0HM2QRP725N4H:00000002 [INF] Sending file. Request path: '"/favicon.ico"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\favicon.ico"' (27b0a520)
+2020-09-17T14:50:56.8117636+07:00 0HM2QRP725N4H:00000002 [INF] Request finished in 96.5691ms 200 image/x-icon (791a596a)
+2020-09-17T14:51:28.2729580+07:00 0HM2QRP725N4L:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/?page=2%20   (ca22a1cb)
+2020-09-17T14:51:28.4651330+07:00 0HM2QRP725N4L:00000002 [INF] Executing action method "ShopMartWebsite.Controllers.HomeController.Index (ShopMartWebsite)" with arguments (["", "", "2"]) - ModelState is Valid (ba7f4ac2)
+2020-09-17T14:51:28.4924699+07:00 0HM2QRP725N4L:00000002 [INF] Entity Framework Core "2.2.0-rtm-35687" initialized '"ShopDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-09-17T14:51:28.6641498+07:00 0HM2QRP725N4L:00000002 [INF] Executed DbCommand ("83"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[id], [x].[amount], [x].[categoryId], [x].[color], [x].[description], [x].[image], [x].[name], [x].[price], [x].[size], [x].[status], [x.category].[id], [x.category].[name], [x.category].[status]
+FROM [product] AS [x]
+LEFT JOIN [category] AS [x.category] ON [x].[categoryId] = [x.category].[id]
+WHERE ([x].[status] = 1) AND ([x].[amount] > 0)
+ORDER BY [x].[categoryId], [x].[id]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_0 ROWS ONLY" (0723d8ff)
+2020-09-17T14:51:28.7099404+07:00 0HM2QRP725N4L:00000002 [INF] Executed DbCommand ("23"ms) [Parameters=["@__p_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [x.Comments].[id], [x.Comments].[content], [x.Comments].[createDate], [x.Comments].[productId], [x.Comments].[status], [x.Comments].[userId]
+FROM [comment] AS [x.Comments]
+INNER JOIN (
+    SELECT DISTINCT [t].*
+    FROM (
+        SELECT [x0].[id], [x0].[categoryId]
+        FROM [product] AS [x0]
+        LEFT JOIN [category] AS [x.category0] ON [x0].[categoryId] = [x.category0].[id]
+        WHERE ([x0].[status] = 1) AND ([x0].[amount] > 0)
+        ORDER BY [x0].[categoryId], [x0].[id]
+        OFFSET @__p_0 ROWS FETCH NEXT @__p_0 ROWS ONLY
+    ) AS [t]
+) AS [t0] ON [x.Comments].[productId] = [t0].[id]
+ORDER BY [t0].[categoryId], [t0].[id]" (0723d8ff)
+2020-09-17T14:51:28.7499893+07:00 0HM2QRP725N4L:00000002 [INF] Executed DbCommand ("6"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [product] AS [x]
+WHERE ([x].[status] = 1) AND ([x].[amount] > 0)" (0723d8ff)
+2020-09-17T14:51:28.7673908+07:00 0HM2QRP725N4L:00000002 [INF] Executing ViewResult, running view at path "/Views/Home/Index.cshtml". (9707eebe)
+2020-09-17T14:51:28.7817222+07:00 0HM2QRP725N4L:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [cate].[id], [cate].[name], [cate].[status]
+FROM [category] AS [cate]
+ORDER BY [cate].[id]" (0723d8ff)
+2020-09-17T14:51:28.7984451+07:00 0HM2QRP725N4L:00000002 [INF] Executed DbCommand ("6"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [cate.Products].[id], [cate.Products].[amount], [cate.Products].[categoryId], [cate.Products].[color], [cate.Products].[description], [cate.Products].[image], [cate.Products].[name], [cate.Products].[price], [cate.Products].[size], [cate.Products].[status]
+FROM [product] AS [cate.Products]
+INNER JOIN (
+    SELECT [cate0].[id]
+    FROM [category] AS [cate0]
+) AS [t] ON [cate.Products].[categoryId] = [t].[id]
+ORDER BY [t].[id]" (0723d8ff)
+2020-09-17T14:51:28.8166729+07:00 0HM2QRP725N4L:00000002 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [cate].[id], [cate].[name], [cate].[status]
+FROM [category] AS [cate]
+ORDER BY [cate].[id]" (0723d8ff)
+2020-09-17T14:51:28.8311481+07:00 0HM2QRP725N4L:00000002 [INF] Executed DbCommand ("2"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [cate.Products].[id], [cate.Products].[amount], [cate.Products].[categoryId], [cate.Products].[color], [cate.Products].[description], [cate.Products].[image], [cate.Products].[name], [cate.Products].[price], [cate.Products].[size], [cate.Products].[status]
+FROM [product] AS [cate.Products]
+INNER JOIN (
+    SELECT [cate0].[id]
+    FROM [category] AS [cate0]
+) AS [t] ON [cate.Products].[categoryId] = [t].[id]
+ORDER BY [t].[id]" (0723d8ff)
+2020-09-17T14:51:28.8632055+07:00 0HM2QRP725N4L:00000002 [INF] Executed action "ShopMartWebsite.Controllers.HomeController.Index (ShopMartWebsite)" in 544.5263ms (afa2e885)
+2020-09-17T14:51:28.9708687+07:00 0HM2QRP725N4L:00000002 [INF] Request finished in 618.4892ms 200 text/html; charset=utf-8 (791a596a)
+2020-09-17T14:51:29.1770117+07:00 0HM2QRP725N4I:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/images/site/227a9510-b896-4966-bec9-cffd25a9c65e.jpg   (ca22a1cb)
+2020-09-17T14:51:29.1789702+07:00 0HM2QRP725N4Q:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/images/site/3cce450e-dd73-406b-af61-a078ddca27d6.jfif   (ca22a1cb)
+2020-09-17T14:51:29.6819327+07:00 0HM2QRP725N4I:00000002 [INF] Sending file. Request path: '"/images/site/227a9510-b896-4966-bec9-cffd25a9c65e.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\images\site\227a9510-b896-4966-bec9-cffd25a9c65e.jpg"' (27b0a520)
+2020-09-17T14:51:29.6838551+07:00 0HM2QRP725N4Q:00000002 [INF] Sending file. Request path: '"/images/site/3cce450e-dd73-406b-af61-a078ddca27d6.jfif"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\images\site\3cce450e-dd73-406b-af61-a078ddca27d6.jfif"' (27b0a520)
+2020-09-17T14:51:29.7153044+07:00 0HM2QRP725N4F:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/images/site/95a21057-45a3-42b1-82a7-83b4e063990b.jpg   (ca22a1cb)
+2020-09-17T14:51:29.7169036+07:00 0HM2QRP725N4G:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/images/site/44ef181b-1b78-4215-9ec6-1da5a28bad87.jpg   (ca22a1cb)
+2020-09-17T14:51:29.7528771+07:00 0HM2QRP725N4F:00000002 [INF] Sending file. Request path: '"/images/site/95a21057-45a3-42b1-82a7-83b4e063990b.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\images\site\95a21057-45a3-42b1-82a7-83b4e063990b.jpg"' (27b0a520)
+2020-09-17T14:51:29.8029575+07:00 0HM2QRP725N4G:00000002 [INF] Sending file. Request path: '"/images/site/44ef181b-1b78-4215-9ec6-1da5a28bad87.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\images\site\44ef181b-1b78-4215-9ec6-1da5a28bad87.jpg"' (27b0a520)
+2020-09-17T14:51:29.8489573+07:00 0HM2QRP725N4M:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/images/site/516f494f-c280-4f69-b8b3-159aa06b994b.jpg   (ca22a1cb)
+2020-09-17T14:51:29.8653230+07:00 0HM2QRP725N4P:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/images/site/65d7db3a-2c6a-475f-8717-449c1681b12c.jfif   (ca22a1cb)
+2020-09-17T14:51:29.8911663+07:00 0HM2QRP725N4O:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/images/site/5444c712-9614-4c48-b3c9-1f710dcf6c30.jpg   (ca22a1cb)
+2020-09-17T14:51:29.9001799+07:00 0HM2QRP725N4M:00000002 [INF] Sending file. Request path: '"/images/site/516f494f-c280-4f69-b8b3-159aa06b994b.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\images\site\516f494f-c280-4f69-b8b3-159aa06b994b.jpg"' (27b0a520)
+2020-09-17T14:51:29.9224273+07:00 0HM2QRP725N4O:00000002 [INF] Sending file. Request path: '"/images/site/5444c712-9614-4c48-b3c9-1f710dcf6c30.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\images\site\5444c712-9614-4c48-b3c9-1f710dcf6c30.jpg"' (27b0a520)
+2020-09-17T14:51:29.9356628+07:00 0HM2QRP725N4P:00000002 [INF] Sending file. Request path: '"/images/site/65d7db3a-2c6a-475f-8717-449c1681b12c.jfif"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\images\site\65d7db3a-2c6a-475f-8717-449c1681b12c.jfif"' (27b0a520)
+2020-09-17T14:51:29.9476421+07:00 0HM2QRP725N48:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44340/images/site/bda58419-8b2a-47f4-ae3f-b6d5f1b7c9e8.jpg   (ca22a1cb)
+2020-09-17T14:51:29.9883785+07:00 0HM2QRP725N48:00000004 [INF] Sending file. Request path: '"/images/site/bda58419-8b2a-47f4-ae3f-b6d5f1b7c9e8.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\images\site\bda58419-8b2a-47f4-ae3f-b6d5f1b7c9e8.jpg"' (27b0a520)
+2020-09-17T14:51:30.3048272+07:00 0HM2QRP725N4Q:00000002 [INF] Request finished in 985.0411ms 200 image/pjpeg (791a596a)
+2020-09-17T14:51:30.8199692+07:00 0HM2QRP725N4P:00000002 [INF] Request finished in 299.0207ms 200 image/pjpeg (791a596a)
+2020-09-17T14:51:31.9127823+07:00 0HM2QRP725N4G:00000002 [INF] Request finished in 1190.1029ms 200 image/jpeg (791a596a)
+2020-09-17T14:51:31.9384028+07:00 0HM2QRP725N4O:00000002 [INF] Request finished in 1030.8426ms 200 image/jpeg (791a596a)
+2020-09-17T14:51:32.1621405+07:00 0HM2QRP725N4I:00000002 [INF] Request finished in 944.452ms 200 image/jpeg (791a596a)
+2020-09-17T14:51:32.5326095+07:00 0HM2QRP725N48:00000004 [INF] Request finished in 393.1035ms 200 image/jpeg (791a596a)
+2020-09-17T14:51:32.5467600+07:00 0HM2QRP725N4M:00000002 [INF] Request finished in 2400.9671ms 200 image/jpeg (791a596a)
+2020-09-17T14:51:32.5788404+07:00 0HM2QRP725N4F:00000002 [INF] Request finished in 1631.0435ms 200 image/jpeg (791a596a)
+2020-09-17T14:51:38.2491109+07:00 0HM2QRP725N4B:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44340/Home/Cart   (ca22a1cb)
+2020-09-17T14:51:38.3265462+07:00 0HM2QRP725N4B:00000003 [INF] Executing action method "ShopMartWebsite.Controllers.HomeController.Cart (ShopMartWebsite)" with arguments (null) - ModelState is Valid (ba7f4ac2)
+2020-09-17T14:51:39.7587988+07:00 0HM2QRP725N4B:00000003 [INF] Executing ViewResult, running view at path "/Views/Home/Cart.cshtml". (9707eebe)
+2020-09-17T14:51:39.8254406+07:00 0HM2QRP725N4B:00000003 [INF] Executed action "ShopMartWebsite.Controllers.HomeController.Cart (ShopMartWebsite)" in 1494.5121ms (afa2e885)
+2020-09-17T14:51:39.9041503+07:00 0HM2QRP725N4B:00000003 [INF] Request finished in 1603.7544ms 200 text/html; charset=utf-8 (791a596a)
+2020-09-17T14:51:40.1837888+07:00 0HM2QRP725N46:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/webfonts/fa-regular-400.woff2   (ca22a1cb)
+2020-09-17T14:51:40.2110684+07:00 0HM2QRP725N46:00000003 [INF] Sending file. Request path: '"/user/webfonts/fa-regular-400.woff2"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\user\webfonts\fa-regular-400.woff2"' (27b0a520)
+2020-09-17T14:51:40.3841948+07:00 0HM2QRP725N46:00000003 [INF] Request finished in 109.1602ms 200 font/woff2 (791a596a)
+2020-09-17T14:52:04.5813240+07:00 0HM2QRP725N4L:00000003 [INF] Request starting HTTP/1.1 POST http://localhost:44340/Home/AddCart application/x-www-form-urlencoded; charset=UTF-8 339 (ca22a1cb)
+2020-09-17T14:52:05.0986401+07:00 0HM2QRP725N4L:00000003 [INF] Executing action method "ShopMartWebsite.Controllers.HomeController.AddCart (ShopMartWebsite)" with arguments (["ShopMartWebsite.Entities.OrderDetail[]", "Thiên", "thienvovan0112@gmail.com", "Bình Thạnh", "Không", "3378000"]) - ModelState is Valid (ba7f4ac2)
+2020-09-17T14:52:05.1854057+07:00 0HM2QRP725N4L:00000003 [INF] Entity Framework Core "2.2.0-rtm-35687" initialized '"ShopDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-09-17T14:52:06.0936622+07:00 0HM2QRP725N4L:00000003 [INF] Executed DbCommand ("188"ms) [Parameters=["@p0='?' (Size = 4000), @p1='?' (DbType = Boolean), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (DbType = Boolean), @p7='?' (DbType = Decimal), @p8='?' (Size = 450)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [order] ([address], [confirm], [createDate], [customer], [info], [note], [status], [total], [userId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+SELECT [id]
+FROM [order]
+WHERE @@ROWCOUNT = 1 AND [id] = scope_identity();" (0723d8ff)
+2020-09-17T14:52:06.5170731+07:00 0HM2QRP725N4L:00000003 [INF] Executed DbCommand ("342"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Decimal)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [orderdetail] ([orderId], [productId], [quantity], [unitPrice])
+VALUES (@p0, @p1, @p2, @p3);
+SELECT [id]
+FROM [orderdetail]
+WHERE @@ROWCOUNT = 1 AND [id] = scope_identity();" (0723d8ff)
+2020-09-17T14:52:06.5474676+07:00 0HM2QRP725N4L:00000003 [INF] Executed DbCommand ("15"ms) [Parameters=["@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Decimal)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [orderdetail] ([orderId], [productId], [quantity], [unitPrice])
+VALUES (@p0, @p1, @p2, @p3);
+SELECT [id]
+FROM [orderdetail]
+WHERE @@ROWCOUNT = 1 AND [id] = scope_identity();" (0723d8ff)
+2020-09-17T14:52:06.6494990+07:00 0HM2QRP725N4L:00000003 [INF] Executing JsonResult, writing value "{ Success = True }". (7bb75e80)
+2020-09-17T14:52:07.4390207+07:00 0HM2QRP725N4L:00000003 [INF] Executed action "ShopMartWebsite.Controllers.HomeController.AddCart (ShopMartWebsite)" in 2634.6704ms (afa2e885)
+2020-09-17T14:52:07.4536591+07:00 0HM2QRP725N4L:00000003 [INF] Request finished in 2883.6735ms 200 application/json; charset=utf-8 (791a596a)
+2020-09-17T14:52:09.3683516+07:00 0HM2QRP725N4I:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44340/Home/Cart   (ca22a1cb)
+2020-09-17T14:52:09.3873125+07:00 0HM2QRP725N4I:00000003 [INF] Executing action method "ShopMartWebsite.Controllers.HomeController.Cart (ShopMartWebsite)" with arguments (null) - ModelState is Valid (ba7f4ac2)
+2020-09-17T14:52:09.4693885+07:00 0HM2QRP725N4I:00000003 [INF] Executing ViewResult, running view at path "/Views/Home/Cart.cshtml". (9707eebe)
+2020-09-17T14:52:09.6653345+07:00 0HM2QRP725N4I:00000003 [INF] Executed action "ShopMartWebsite.Controllers.HomeController.Cart (ShopMartWebsite)" in 99.9736ms (afa2e885)
+2020-09-17T14:52:09.7294892+07:00 0HM2QRP725N4I:00000003 [INF] Request finished in 313.9755ms 200 text/html; charset=utf-8 (791a596a)
+2020-09-17T14:52:20.7610302+07:00 0HM2QRP725N4Q:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44340/   (ca22a1cb)
+2020-09-17T14:52:20.7682729+07:00 0HM2QRP725N4Q:00000003 [INF] Executing action method "ShopMartWebsite.Controllers.HomeController.Index (ShopMartWebsite)" with arguments (["", "", ""]) - ModelState is Valid (ba7f4ac2)
+2020-09-17T14:52:20.7770399+07:00 0HM2QRP725N4Q:00000003 [INF] Entity Framework Core "2.2.0-rtm-35687" initialized '"ShopDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-09-17T14:52:20.8015313+07:00 0HM2QRP725N4Q:00000003 [INF] Executed DbCommand ("12"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[id], [x].[amount], [x].[categoryId], [x].[color], [x].[description], [x].[image], [x].[name], [x].[price], [x].[size], [x].[status], [x.category].[id], [x.category].[name], [x.category].[status]
+FROM [product] AS [x]
+LEFT JOIN [category] AS [x.category] ON [x].[categoryId] = [x.category].[id]
+WHERE ([x].[status] = 1) AND ([x].[amount] > 0)
+ORDER BY [x].[categoryId], [x].[id]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2020-09-17T14:52:20.8285365+07:00 0HM2QRP725N4Q:00000003 [INF] Executed DbCommand ("18"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [x.Comments].[id], [x.Comments].[content], [x.Comments].[createDate], [x.Comments].[productId], [x.Comments].[status], [x.Comments].[userId]
+FROM [comment] AS [x.Comments]
+INNER JOIN (
+    SELECT DISTINCT [t].*
+    FROM (
+        SELECT [x0].[id], [x0].[categoryId]
+        FROM [product] AS [x0]
+        LEFT JOIN [category] AS [x.category0] ON [x0].[categoryId] = [x.category0].[id]
+        WHERE ([x0].[status] = 1) AND ([x0].[amount] > 0)
+        ORDER BY [x0].[categoryId], [x0].[id]
+        OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+    ) AS [t]
+) AS [t0] ON [x.Comments].[productId] = [t0].[id]
+ORDER BY [t0].[categoryId], [t0].[id]" (0723d8ff)
+2020-09-17T14:52:20.8452321+07:00 0HM2QRP725N4Q:00000003 [INF] Executed DbCommand ("5"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [product] AS [x]
+WHERE ([x].[status] = 1) AND ([x].[amount] > 0)" (0723d8ff)
+2020-09-17T14:52:20.8523009+07:00 0HM2QRP725N4Q:00000003 [INF] Executing ViewResult, running view at path "/Views/Home/Index.cshtml". (9707eebe)
+2020-09-17T14:52:20.8614577+07:00 0HM2QRP725N4Q:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [cate].[id], [cate].[name], [cate].[status]
+FROM [category] AS [cate]
+ORDER BY [cate].[id]" (0723d8ff)
+2020-09-17T14:52:20.8758256+07:00 0HM2QRP725N4Q:00000003 [INF] Executed DbCommand ("4"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [cate.Products].[id], [cate.Products].[amount], [cate.Products].[categoryId], [cate.Products].[color], [cate.Products].[description], [cate.Products].[image], [cate.Products].[name], [cate.Products].[price], [cate.Products].[size], [cate.Products].[status]
+FROM [product] AS [cate.Products]
+INNER JOIN (
+    SELECT [cate0].[id]
+    FROM [category] AS [cate0]
+) AS [t] ON [cate.Products].[categoryId] = [t].[id]
+ORDER BY [t].[id]" (0723d8ff)
+2020-09-17T14:52:20.8905619+07:00 0HM2QRP725N4Q:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [cate].[id], [cate].[name], [cate].[status]
+FROM [category] AS [cate]
+ORDER BY [cate].[id]" (0723d8ff)
+2020-09-17T14:52:20.9013568+07:00 0HM2QRP725N4Q:00000003 [INF] Executed DbCommand ("1"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [cate.Products].[id], [cate.Products].[amount], [cate.Products].[categoryId], [cate.Products].[color], [cate.Products].[description], [cate.Products].[image], [cate.Products].[name], [cate.Products].[price], [cate.Products].[size], [cate.Products].[status]
+FROM [product] AS [cate.Products]
+INNER JOIN (
+    SELECT [cate0].[id]
+    FROM [category] AS [cate0]
+) AS [t] ON [cate.Products].[categoryId] = [t].[id]
+ORDER BY [t].[id]" (0723d8ff)
+2020-09-17T14:52:20.9165872+07:00 0HM2QRP725N4Q:00000003 [INF] Executed action "ShopMartWebsite.Controllers.HomeController.Index (ShopMartWebsite)" in 146.1634ms (afa2e885)
+2020-09-17T14:52:21.0136536+07:00 0HM2QRP725N4Q:00000003 [INF] Request finished in 171.859ms 200 text/html; charset=utf-8 (791a596a)
+2020-09-17T14:52:29.9364923+07:00 0HM2QRP725N4P:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin   (ca22a1cb)
+2020-09-17T14:52:29.9645903+07:00 0HM2QRP725N4P:00000003 [INF] Executing action method "ShopMartWebsite.Controllers.AdminController.Index (ShopMartWebsite)" with arguments (null) - ModelState is Valid (ba7f4ac2)
+2020-09-17T14:52:29.9899284+07:00 0HM2QRP725N4P:00000003 [INF] Executing RedirectResult, redirecting to "/AdminLogin". (d98d540e)
+2020-09-17T14:52:30.0110652+07:00 0HM2QRP725N4P:00000003 [INF] Executed action "ShopMartWebsite.Controllers.AdminController.Index (ShopMartWebsite)" in 49.5739ms (afa2e885)
+2020-09-17T14:52:30.0258319+07:00 0HM2QRP725N4P:00000003 [INF] Request finished in 86.9452ms 302  (791a596a)
+2020-09-17T14:52:30.0421935+07:00 0HM2QRP725N48:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44340/AdminLogin   (ca22a1cb)
+2020-09-17T14:52:30.0596411+07:00 0HM2QRP725N48:00000005 [INF] Executing action method "ShopMartWebsite.Controllers.AdminLoginController.Index (ShopMartWebsite)" with arguments (null) - ModelState is Valid (ba7f4ac2)
+2020-09-17T14:52:30.6786718+07:00 0HM2QRP725N48:00000005 [INF] Executing ViewResult, running view at path "/Views/AdminLogin/Index.cshtml". (9707eebe)
+2020-09-17T14:52:30.9479532+07:00 0HM2QRP725N48:00000005 [INF] Executed action "ShopMartWebsite.Controllers.AdminLoginController.Index (ShopMartWebsite)" in 865.5486ms (afa2e885)
+2020-09-17T14:52:30.9640638+07:00 0HM2QRP725N48:00000005 [INF] Request finished in 919.9104ms 200 text/html; charset=utf-8 (791a596a)
+2020-09-17T14:52:31.3530129+07:00 0HM2QRP725N4B:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44340/lib/notify/notify.js   (ca22a1cb)
+2020-09-17T14:52:31.3613358+07:00 0HM2QRP725N4I:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44340/app/shared/shop.js   (ca22a1cb)
+2020-09-17T14:52:31.3713179+07:00 0HM2QRP725N4M:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/bootstrap/dist/css/bootstrap.min.css   (ca22a1cb)
+2020-09-17T14:52:31.3861267+07:00 0HM2QRP725N4B:00000004 [INF] Sending file. Request path: '"/lib/notify/notify.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\lib\notify\notify.js"' (27b0a520)
+2020-09-17T14:52:31.3968110+07:00 0HM2QRP725N4I:00000004 [INF] Sending file. Request path: '"/app/shared/shop.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\app\shared\shop.js"' (27b0a520)
+2020-09-17T14:52:31.4033942+07:00 0HM2QRP725N4M:00000003 [INF] Sending file. Request path: '"/admin/vendors/bootstrap/dist/css/bootstrap.min.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\bootstrap\dist\css\bootstrap.min.css"' (27b0a520)
+2020-09-17T14:52:31.4174710+07:00 0HM2QRP725N46:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/font-awesome/css/font-awesome.min.css   (ca22a1cb)
+2020-09-17T14:52:31.4215868+07:00 0HM2QRP725N4L:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/nprogress/nprogress.css   (ca22a1cb)
+2020-09-17T14:52:31.4450302+07:00 0HM2QRP725N46:00000004 [INF] Sending file. Request path: '"/admin/vendors/font-awesome/css/font-awesome.min.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\font-awesome\css\font-awesome.min.css"' (27b0a520)
+2020-09-17T14:52:31.4527615+07:00 0HM2QRP725N4L:00000004 [INF] Sending file. Request path: '"/admin/vendors/nprogress/nprogress.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\nprogress\nprogress.css"' (27b0a520)
+2020-09-17T14:52:31.4754962+07:00 0HM2QRP725N4Q:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/build/css/custom.min.css   (ca22a1cb)
+2020-09-17T14:52:31.5986966+07:00 0HM2QRP725N4Q:00000004 [INF] Sending file. Request path: '"/admin/build/css/custom.min.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\build\css\custom.min.css"' (27b0a520)
+2020-09-17T14:52:31.7027131+07:00 0HM2QRP725N4I:00000004 [INF] Request finished in 451.5616ms 200 application/javascript (791a596a)
+2020-09-17T14:52:31.7089523+07:00 0HM2QRP725N4M:00000003 [INF] Request finished in 602.3375ms 200 text/css (791a596a)
+2020-09-17T14:52:31.7409334+07:00 0HM2QRP725N46:00000004 [INF] Request finished in 505.884ms 200 text/css (791a596a)
+2020-09-17T14:52:31.7428281+07:00 0HM2QRP725N4B:00000004 [INF] Request finished in 614.4364ms 200 application/javascript (791a596a)
+2020-09-17T14:52:31.7777936+07:00 0HM2QRP725N48:00000006 [INF] Request starting HTTP/1.1 GET http://localhost:44340/app/controllers/login/index.js   (ca22a1cb)
+2020-09-17T14:52:31.7824155+07:00 0HM2QRP725N4L:00000004 [INF] Request finished in 494.1768ms 200 text/css (791a596a)
+2020-09-17T14:52:31.7974862+07:00 0HM2QRP725N48:00000006 [INF] Sending file. Request path: '"/app/controllers/login/index.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\app\controllers\login\index.js"' (27b0a520)
+2020-09-17T14:52:31.8136535+07:00 0HM2QRP725N51:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/animate.css/animate.min.css   (ca22a1cb)
+2020-09-17T14:52:31.8184585+07:00 0HM2QRP725N4P:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44340/lib/jquery/dist/jquery.js   (ca22a1cb)
+2020-09-17T14:52:31.8307130+07:00 0HM2QRP725N51:00000001 [INF] Sending file. Request path: '"/admin/vendors/animate.css/animate.min.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\animate.css\animate.min.css"' (27b0a520)
+2020-09-17T14:52:31.8679607+07:00 0HM2QRP725N4P:00000004 [INF] Sending file. Request path: '"/lib/jquery/dist/jquery.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\lib\jquery\dist\jquery.js"' (27b0a520)
+2020-09-17T14:52:31.8857856+07:00 0HM2QRP725N4Q:00000004 [INF] Request finished in 590.1281ms 200 text/css (791a596a)
+2020-09-17T14:52:31.9121168+07:00 0HM2QRP725N48:00000006 [INF] Request finished in 582.8235ms 200 application/javascript (791a596a)
+2020-09-17T14:52:31.9358075+07:00 0HM2QRP725N51:00000001 [INF] Request finished in 617.6411ms 200 text/css (791a596a)
+2020-09-17T14:52:32.0175770+07:00 0HM2QRP725N4I:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/font-awesome/fonts/fontawesome-webfont.woff2?v=4.6.3   (ca22a1cb)
+2020-09-17T14:52:32.0320356+07:00 0HM2QRP725N4I:00000005 [INF] Sending file. Request path: '"/admin/vendors/font-awesome/fonts/fontawesome-webfont.woff2"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\font-awesome\fonts\fontawesome-webfont.woff2"' (27b0a520)
+2020-09-17T14:52:32.2183598+07:00 0HM2QRP725N4I:00000005 [INF] Request finished in 55.4637ms 200 font/woff2 (791a596a)
+2020-09-17T14:52:32.2275309+07:00 0HM2QRP725N4P:00000004 [INF] Request finished in 997.3876ms 200 application/javascript (791a596a)
+2020-09-17T14:52:40.5059131+07:00 0HM2QRP725N4L:00000005 [INF] Request starting HTTP/1.1 POST http://localhost:44340/AdminLogin/Authen application/x-www-form-urlencoded; charset=UTF-8 29 (ca22a1cb)
+2020-09-17T14:52:40.5979658+07:00 0HM2QRP725N4L:00000005 [INF] Executing action method "ShopMartWebsite.Controllers.AdminLoginController.Authen (ShopMartWebsite)" with arguments (["ShopMartWebsite.Models.LoginViewModel", ""]) - ModelState is Valid (ba7f4ac2)
+2020-09-17T14:52:40.6791997+07:00 0HM2QRP725N4L:00000005 [INF] Entity Framework Core "2.2.0-rtm-35687" initialized '"ShopDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-09-17T14:52:40.9937106+07:00 0HM2QRP725N4L:00000005 [INF] Executed DbCommand ("89"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[AccessFailedCount], [u].[ConcurrencyStamp], [u].[Email], [u].[EmailConfirmed], [u].[LockoutEnabled], [u].[LockoutEnd], [u].[NormalizedEmail], [u].[NormalizedUserName], [u].[PasswordHash], [u].[PhoneNumber], [u].[PhoneNumberConfirmed], [u].[SecurityStamp], [u].[TwoFactorEnabled], [u].[UserName], [u].[address], [u].[birthDay], [u].[displayname], [u].[gender], [u].[password], [u].[phone], [u].[status]
+FROM [AspNetUsers] AS [u]
+WHERE [u].[NormalizedUserName] = @__normalizedUserName_0" (0723d8ff)
+2020-09-17T14:52:41.5666406+07:00 0HM2QRP725N4L:00000005 [WRN] Invalid password for user "017f5ba3-ca0d-4ef3-9d9d-7645ebd24e77". (c2dce6c7)
+2020-09-17T14:52:41.5756171+07:00 0HM2QRP725N4L:00000005 [WRN] User "017f5ba3-ca0d-4ef3-9d9d-7645ebd24e77" failed to provide the correct password. (ec8d2479)
+2020-09-17T14:52:41.6501999+07:00 0HM2QRP725N4L:00000005 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2020-09-17T14:52:41.7288355+07:00 0HM2QRP725N4L:00000005 [INF] Executed action "ShopMartWebsite.Controllers.AdminLoginController.Authen (ShopMartWebsite)" in 1161.0796ms (afa2e885)
+2020-09-17T14:52:41.7817212+07:00 0HM2QRP725N4L:00000005 [INF] Request finished in 1242.0227ms 200 application/json; charset=utf-8 (791a596a)
+2020-09-17T14:59:04.4299667+07:00 0HM2QRP725N52:00000001 [INF] Request starting HTTP/1.1 POST http://localhost:44340/AdminLogin/Authen application/x-www-form-urlencoded; charset=UTF-8 43 (ca22a1cb)
+2020-09-17T14:59:04.6524353+07:00 0HM2QRP725N52:00000001 [INF] Executing action method "ShopMartWebsite.Controllers.AdminLoginController.Authen (ShopMartWebsite)" with arguments (["ShopMartWebsite.Models.LoginViewModel", ""]) - ModelState is Valid (ba7f4ac2)
+2020-09-17T14:59:04.7281076+07:00 0HM2QRP725N52:00000001 [INF] Entity Framework Core "2.2.0-rtm-35687" initialized '"ShopDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-09-17T14:59:05.3357631+07:00 0HM2QRP725N52:00000001 [INF] Executed DbCommand ("322"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[AccessFailedCount], [u].[ConcurrencyStamp], [u].[Email], [u].[EmailConfirmed], [u].[LockoutEnabled], [u].[LockoutEnd], [u].[NormalizedEmail], [u].[NormalizedUserName], [u].[PasswordHash], [u].[PhoneNumber], [u].[PhoneNumberConfirmed], [u].[SecurityStamp], [u].[TwoFactorEnabled], [u].[UserName], [u].[address], [u].[birthDay], [u].[displayname], [u].[gender], [u].[password], [u].[phone], [u].[status]
+FROM [AspNetUsers] AS [u]
+WHERE [u].[NormalizedUserName] = @__normalizedUserName_0" (0723d8ff)
+2020-09-17T14:59:05.3832862+07:00 0HM2QRP725N52:00000001 [WRN] Invalid password for user "017f5ba3-ca0d-4ef3-9d9d-7645ebd24e77". (c2dce6c7)
+2020-09-17T14:59:05.3929566+07:00 0HM2QRP725N52:00000001 [WRN] User "017f5ba3-ca0d-4ef3-9d9d-7645ebd24e77" failed to provide the correct password. (ec8d2479)
+2020-09-17T14:59:05.4144734+07:00 0HM2QRP725N52:00000001 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2020-09-17T14:59:05.4376627+07:00 0HM2QRP725N52:00000001 [INF] Executed action "ShopMartWebsite.Controllers.AdminLoginController.Authen (ShopMartWebsite)" in 932.7019ms (afa2e885)
+2020-09-17T14:59:05.4515156+07:00 0HM2QRP725N52:00000001 [INF] Request finished in 1085.1533ms 200 application/json; charset=utf-8 (791a596a)
+2020-09-17T15:05:33.4528965+07:00 0HM2QRP725N53:00000001 [INF] Request starting HTTP/1.1 POST http://localhost:44340/AdminLogin/Authen application/x-www-form-urlencoded; charset=UTF-8 32 (ca22a1cb)
+2020-09-17T15:05:33.7670690+07:00 0HM2QRP725N53:00000001 [INF] Executing action method "ShopMartWebsite.Controllers.AdminLoginController.Authen (ShopMartWebsite)" with arguments (["ShopMartWebsite.Models.LoginViewModel", ""]) - ModelState is Valid (ba7f4ac2)
+2020-09-17T15:05:33.8810089+07:00 0HM2QRP725N53:00000001 [INF] Entity Framework Core "2.2.0-rtm-35687" initialized '"ShopDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-09-17T15:05:35.4152101+07:00 0HM2QRP725N53:00000001 [INF] Executed DbCommand ("1,326"ms) [Parameters=["@__normalizedUserName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[AccessFailedCount], [u].[ConcurrencyStamp], [u].[Email], [u].[EmailConfirmed], [u].[LockoutEnabled], [u].[LockoutEnd], [u].[NormalizedEmail], [u].[NormalizedUserName], [u].[PasswordHash], [u].[PhoneNumber], [u].[PhoneNumberConfirmed], [u].[SecurityStamp], [u].[TwoFactorEnabled], [u].[UserName], [u].[address], [u].[birthDay], [u].[displayname], [u].[gender], [u].[password], [u].[phone], [u].[status]
+FROM [AspNetUsers] AS [u]
+WHERE [u].[NormalizedUserName] = @__normalizedUserName_0" (0723d8ff)
+2020-09-17T15:05:40.9185957+07:00 0HM2QRP725N53:00000001 [INF] Executed DbCommand ("216"ms) [Parameters=["@__user_Id_0='?' (Size = 450)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [uc].[Id], [uc].[ClaimType], [uc].[ClaimValue], [uc].[UserId]
+FROM [AspNetUserClaims] AS [uc]
+WHERE [uc].[UserId] = @__user_Id_0" (0723d8ff)
+2020-09-17T15:05:42.5814036+07:00 0HM2QRP725N53:00000001 [INF] Executed DbCommand ("1,182"ms) [Parameters=["@__userId_0='?' (Size = 450)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [role].[Name]
+FROM [AspNetUserRoles] AS [userRole]
+INNER JOIN [AspNetRoles] AS [role] ON [userRole].[RoleId] = [role].[Id]
+WHERE [userRole].[UserId] = @__userId_0" (0723d8ff)
+2020-09-17T15:05:42.7258160+07:00 0HM2QRP725N53:00000001 [INF] Executed DbCommand ("8"ms) [Parameters=["@__normalizedName_0='?' (Size = 256)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[Id], [r].[ConcurrencyStamp], [r].[CreationDate], [r].[Description], [r].[Name], [r].[NormalizedName]
+FROM [AspNetRoles] AS [r]
+WHERE [r].[NormalizedName] = @__normalizedName_0" (0723d8ff)
+2020-09-17T15:05:42.8761124+07:00 0HM2QRP725N53:00000001 [INF] Executed DbCommand ("27"ms) [Parameters=["@__role_Id_0='?' (Size = 450)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [rc].[ClaimType], [rc].[ClaimValue]
+FROM [AspNetRoleClaims] AS [rc]
+WHERE [rc].[RoleId] = @__role_Id_0" (0723d8ff)
+2020-09-17T15:05:46.8301020+07:00 0HM2QRP725N53:00000001 [INF] AuthenticationScheme: "Identity.Application" signed in. (c66dd7e7)
+2020-09-17T15:05:46.8691805+07:00 0HM2QRP725N53:00000001 [INF] User logged in. (fdce0db4)
+2020-09-17T15:05:46.8872448+07:00 0HM2QRP725N53:00000001 [INF] Executing ObjectResult, writing value "Microsoft.AspNetCore.Mvc.ControllerContext". (4e968210)
+2020-09-17T15:05:46.9149060+07:00 0HM2QRP725N53:00000001 [INF] Executed action "ShopMartWebsite.Controllers.AdminLoginController.Authen (ShopMartWebsite)" in 13343.6528ms (afa2e885)
+2020-09-17T15:05:46.9261736+07:00 0HM2QRP725N53:00000001 [INF] Request finished in 13640.5464ms 200 application/json; charset=utf-8 (791a596a)
+2020-09-17T15:05:47.5578093+07:00 0HM2QRP725N53:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/Admin/Index   (ca22a1cb)
+2020-09-17T15:05:47.8990048+07:00 0HM2QRP725N53:00000002 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2020-09-17T15:05:47.9703896+07:00 0HM2QRP725N53:00000002 [INF] Executing action method "ShopMartWebsite.Controllers.AdminController.Index (ShopMartWebsite)" with arguments (null) - ModelState is Valid (ba7f4ac2)
+2020-09-17T15:05:51.5872707+07:00 0HM2QRP725N53:00000002 [INF] Executing ViewResult, running view at path "/Views/Admin/Index.cshtml". (9707eebe)
+2020-09-17T15:05:55.0280085+07:00 0HM2QRP725N53:00000002 [INF] Executed action "ShopMartWebsite.Controllers.AdminController.Index (ShopMartWebsite)" in 7058.9013ms (afa2e885)
+2020-09-17T15:05:55.0600083+07:00 0HM2QRP725N53:00000002 [INF] Request finished in 7501.8461ms 200 text/html; charset=utf-8 (791a596a)
+2020-09-17T15:05:55.6448592+07:00 0HM2QRP725N53:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/iCheck/skins/flat/green.css   (ca22a1cb)
+2020-09-17T15:05:55.7426208+07:00 0HM2QRP725N53:00000003 [INF] Sending file. Request path: '"/admin/vendors/iCheck/skins/flat/green.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\iCheck\skins\flat\green.css"' (27b0a520)
+2020-09-17T15:05:55.7518535+07:00 0HM2QRP725N57:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css   (ca22a1cb)
+2020-09-17T15:05:55.8252479+07:00 0HM2QRP725N58:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/bootstrap-daterangepicker/daterangepicker.css   (ca22a1cb)
+2020-09-17T15:05:55.8315884+07:00 0HM2QRP725N57:00000001 [INF] Sending file. Request path: '"/admin/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\datatables.net-buttons-bs\css\buttons.bootstrap.min.css"' (27b0a520)
+2020-09-17T15:05:55.8692969+07:00 0HM2QRP725N56:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/jqvmap/dist/jqvmap.min.css   (ca22a1cb)
+2020-09-17T15:05:55.8893727+07:00 0HM2QRP725N58:00000001 [INF] Sending file. Request path: '"/admin/vendors/bootstrap-daterangepicker/daterangepicker.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\bootstrap-daterangepicker\daterangepicker.css"' (27b0a520)
+2020-09-17T15:05:55.9056722+07:00 0HM2QRP725N53:00000003 [INF] Request finished in 278.0096ms 200 text/css (791a596a)
+2020-09-17T15:05:55.9431888+07:00 0HM2QRP725N56:00000001 [INF] Sending file. Request path: '"/admin/vendors/jqvmap/dist/jqvmap.min.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\jqvmap\dist\jqvmap.min.css"' (27b0a520)
+2020-09-17T15:05:55.9546360+07:00 0HM2QRP725N55:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css   (ca22a1cb)
+2020-09-17T15:05:56.0108817+07:00 0HM2QRP725N57:00000001 [INF] Request finished in 295.6871ms 200 text/css (791a596a)
+2020-09-17T15:05:56.0425478+07:00 0HM2QRP725N58:00000001 [INF] Request finished in 356.016ms 200 text/css (791a596a)
+2020-09-17T15:05:56.0479230+07:00 0HM2QRP725N55:00000001 [INF] Sending file. Request path: '"/admin/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\datatables.net-bs\css\dataTables.bootstrap.min.css"' (27b0a520)
+2020-09-17T15:05:56.0916433+07:00 0HM2QRP725N54:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css   (ca22a1cb)
+2020-09-17T15:05:56.1043935+07:00 0HM2QRP725N59:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css   (ca22a1cb)
+2020-09-17T15:05:56.1403420+07:00 0HM2QRP725N5B:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css   (ca22a1cb)
+2020-09-17T15:05:56.1530294+07:00 0HM2QRP725N54:00000001 [INF] Sending file. Request path: '"/admin/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\bootstrap-progressbar\css\bootstrap-progressbar-3.3.4.min.css"' (27b0a520)
+2020-09-17T15:05:56.4482393+07:00 0HM2QRP725N59:00000001 [INF] Sending file. Request path: '"/admin/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\datatables.net-scroller-bs\css\scroller.bootstrap.min.css"' (27b0a520)
+2020-09-17T15:05:56.5108860+07:00 0HM2QRP725N54:00000001 [INF] Request finished in 576.6637ms 200 text/css (791a596a)
+2020-09-17T15:05:56.5194009+07:00 0HM2QRP725N55:00000001 [INF] Request finished in 786.5492ms 200 text/css (791a596a)
+2020-09-17T15:05:56.5773098+07:00 0HM2QRP725N5B:00000001 [INF] Sending file. Request path: '"/admin/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\datatables.net-responsive-bs\css\responsive.bootstrap.min.css"' (27b0a520)
+2020-09-17T15:05:56.7278613+07:00 0HM2QRP725N5A:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css   (ca22a1cb)
+2020-09-17T15:05:56.7908365+07:00 0HM2QRP725N56:00000001 [INF] Request finished in 388.9513ms 200 text/css (791a596a)
+2020-09-17T15:05:56.8592626+07:00 0HM2QRP725N59:00000001 [INF] Request finished in 1082.9725ms 200 text/css (791a596a)
+2020-09-17T15:05:56.8665473+07:00 0HM2QRP725N53:00000004 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/jquery/dist/jquery.min.js   (ca22a1cb)
+2020-09-17T15:05:56.8916044+07:00 0HM2QRP725N53:00000004 [INF] Sending file. Request path: '"/admin/vendors/jquery/dist/jquery.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\jquery\dist\jquery.min.js"' (27b0a520)
+2020-09-17T15:05:56.9038662+07:00 0HM2QRP725N5B:00000001 [INF] Request finished in 1155.5253ms 200 text/css (791a596a)
+2020-09-17T15:05:56.9283710+07:00 0HM2QRP725N5A:00000001 [INF] Sending file. Request path: '"/admin/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\datatables.net-fixedheader-bs\css\fixedHeader.bootstrap.min.css"' (27b0a520)
+2020-09-17T15:05:57.1925999+07:00 0HM2QRP725N5A:00000001 [INF] Request finished in 1314.2122ms 200 text/css (791a596a)
+2020-09-17T15:05:58.6444705+07:00 0HM2QRP725N56:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/nprogress/nprogress.js   (ca22a1cb)
+2020-09-17T15:05:58.6521097+07:00 0HM2QRP725N59:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js   (ca22a1cb)
+2020-09-17T15:05:58.7897488+07:00 0HM2QRP725N56:00000002 [INF] Sending file. Request path: '"/admin/vendors/nprogress/nprogress.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\nprogress\nprogress.js"' (27b0a520)
+2020-09-17T15:05:58.9977336+07:00 0HM2QRP725N59:00000002 [INF] Sending file. Request path: '"/admin/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\datatables.net-bs\js\dataTables.bootstrap.min.js"' (27b0a520)
+2020-09-17T15:05:59.3194246+07:00 0HM2QRP725N5F:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js   (ca22a1cb)
+2020-09-17T15:05:59.3574233+07:00 0HM2QRP725N59:00000002 [INF] Request finished in 799.4359ms 200 application/javascript (791a596a)
+2020-09-17T15:05:59.3614510+07:00 0HM2QRP725N5F:00000001 [INF] Sending file. Request path: '"/admin/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\datatables.net-buttons-bs\js\buttons.bootstrap.min.js"' (27b0a520)
+2020-09-17T15:05:59.3873286+07:00 0HM2QRP725N5B:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/datatables.net-buttons/js/buttons.print.min.js   (ca22a1cb)
+2020-09-17T15:05:59.4925288+07:00 0HM2QRP725N5L:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js   (ca22a1cb)
+2020-09-17T15:05:59.5023516+07:00 0HM2QRP725N5F:00000001 [INF] Request finished in 431.9662ms 200 application/javascript (791a596a)
+2020-09-17T15:05:59.5572428+07:00 0HM2QRP725N5B:00000002 [INF] Sending file. Request path: '"/admin/vendors/datatables.net-buttons/js/buttons.print.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\datatables.net-buttons\js\buttons.print.min.js"' (27b0a520)
+2020-09-17T15:05:59.6547180+07:00 0HM2QRP725N5L:00000001 [INF] Sending file. Request path: '"/admin/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\datatables.net-fixedheader\js\dataTables.fixedHeader.min.js"' (27b0a520)
+2020-09-17T15:05:59.6623798+07:00 0HM2QRP725N5M:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/datatables.net-scroller/js/dataTables.scroller.min.js   (ca22a1cb)
+2020-09-17T15:05:59.6928997+07:00 0HM2QRP725N5B:00000002 [INF] Request finished in 1255.0723ms 200 application/javascript (791a596a)
+2020-09-17T15:05:59.7152488+07:00 0HM2QRP725N5M:00000001 [INF] Sending file. Request path: '"/admin/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\datatables.net-scroller\js\dataTables.scroller.min.js"' (27b0a520)
+2020-09-17T15:05:59.9394313+07:00 0HM2QRP725N58:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/fastclick/lib/fastclick.js   (ca22a1cb)
+2020-09-17T15:06:00.0506211+07:00 0HM2QRP725N5N:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/pdfmake/build/vfs_fonts.js   (ca22a1cb)
+2020-09-17T15:06:00.0628623+07:00 0HM2QRP725N5L:00000001 [INF] Request finished in 517.6307ms 200 application/javascript (791a596a)
+2020-09-17T15:06:00.2447286+07:00 0HM2QRP725N5N:00000001 [INF] Sending file. Request path: '"/admin/vendors/pdfmake/build/vfs_fonts.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\pdfmake\build\vfs_fonts.js"' (27b0a520)
+2020-09-17T15:06:00.2731642+07:00 0HM2QRP725N5M:00000001 [INF] Request finished in 523.562ms 200 application/javascript (791a596a)
+2020-09-17T15:06:00.3039931+07:00 0HM2QRP725N5O:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/moment/min/moment.min.js   (ca22a1cb)
+2020-09-17T15:06:00.3523060+07:00 0HM2QRP725N5P:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/jqvmap/dist/jquery.vmap.js   (ca22a1cb)
+2020-09-17T15:06:00.3586462+07:00 0HM2QRP725N5O:00000001 [INF] Sending file. Request path: '"/admin/vendors/moment/min/moment.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\moment\min\moment.min.js"' (27b0a520)
+2020-09-17T15:06:00.3818425+07:00 0HM2QRP725N58:00000002 [INF] Sending file. Request path: '"/admin/vendors/fastclick/lib/fastclick.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\fastclick\lib\fastclick.js"' (27b0a520)
+2020-09-17T15:06:00.3917392+07:00 0HM2QRP725N5P:00000001 [INF] Sending file. Request path: '"/admin/vendors/jqvmap/dist/jquery.vmap.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\jqvmap\dist\jquery.vmap.js"' (27b0a520)
+2020-09-17T15:06:00.4185880+07:00 0HM2QRP725N57:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/bootstrap/dist/js/bootstrap.bundle.min.js   (ca22a1cb)
+2020-09-17T15:06:00.4976212+07:00 0HM2QRP725N5H:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/Flot/jquery.flot.pie.js   (ca22a1cb)
+2020-09-17T15:06:00.5106558+07:00 0HM2QRP725N57:00000002 [INF] Sending file. Request path: '"/admin/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\bootstrap\dist\js\bootstrap.bundle.min.js"' (27b0a520)
+2020-09-17T15:06:00.5428848+07:00 0HM2QRP725N5H:00000001 [INF] Sending file. Request path: '"/admin/vendors/Flot/jquery.flot.pie.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\Flot\jquery.flot.pie.js"' (27b0a520)
+2020-09-17T15:06:00.5717224+07:00 0HM2QRP725N5E:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/gauge.js/dist/gauge.min.js   (ca22a1cb)
+2020-09-17T15:06:00.6086278+07:00 0HM2QRP725N5C:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/datatables.net-buttons/js/dataTables.buttons.min.js   (ca22a1cb)
+2020-09-17T15:06:00.6219014+07:00 0HM2QRP725N5E:00000001 [INF] Sending file. Request path: '"/admin/vendors/gauge.js/dist/gauge.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\gauge.js\dist\gauge.min.js"' (27b0a520)
+2020-09-17T15:06:00.6543637+07:00 0HM2QRP725N5C:00000001 [INF] Sending file. Request path: '"/admin/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\datatables.net-buttons\js\dataTables.buttons.min.js"' (27b0a520)
+2020-09-17T15:06:00.6616086+07:00 0HM2QRP725N5D:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/skycons/skycons.js   (ca22a1cb)
+2020-09-17T15:06:00.7405490+07:00 0HM2QRP725N5A:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/iCheck/icheck.min.js   (ca22a1cb)
+2020-09-17T15:06:00.7480539+07:00 0HM2QRP725N5D:00000001 [INF] Sending file. Request path: '"/admin/vendors/skycons/skycons.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\skycons\skycons.js"' (27b0a520)
+2020-09-17T15:06:00.7574893+07:00 0HM2QRP725N54:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/datatables.net/js/jquery.dataTables.min.js   (ca22a1cb)
+2020-09-17T15:06:00.7889190+07:00 0HM2QRP725N5A:00000002 [INF] Sending file. Request path: '"/admin/vendors/iCheck/icheck.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\iCheck\icheck.min.js"' (27b0a520)
+2020-09-17T15:06:00.7950568+07:00 0HM2QRP725N54:00000002 [INF] Sending file. Request path: '"/admin/vendors/datatables.net/js/jquery.dataTables.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\datatables.net\js\jquery.dataTables.min.js"' (27b0a520)
+2020-09-17T15:06:00.8136182+07:00 0HM2QRP725N53:00000004 [INF] Request finished in 1533.9284ms 200 application/javascript (791a596a)
+2020-09-17T15:06:00.8190973+07:00 0HM2QRP725N55:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/Chart.js/dist/Chart.min.js   (ca22a1cb)
+2020-09-17T15:06:00.8380495+07:00 0HM2QRP725N55:00000002 [INF] Sending file. Request path: '"/admin/vendors/Chart.js/dist/Chart.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\Chart.js\dist\Chart.min.js"' (27b0a520)
+2020-09-17T15:06:00.8445460+07:00 0HM2QRP725N5I:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/jszip/dist/jszip.min.js   (ca22a1cb)
+2020-09-17T15:06:00.8727480+07:00 0HM2QRP725N5G:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js   (ca22a1cb)
+2020-09-17T15:06:00.8798333+07:00 0HM2QRP725N5I:00000001 [INF] Sending file. Request path: '"/admin/vendors/jszip/dist/jszip.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\jszip\dist\jszip.min.js"' (27b0a520)
+2020-09-17T15:06:00.8990996+07:00 0HM2QRP725N5G:00000001 [INF] Sending file. Request path: '"/admin/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\bootstrap-progressbar\bootstrap-progressbar.min.js"' (27b0a520)
+2020-09-17T15:06:00.9023557+07:00 0HM2QRP725N5K:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/Flot/jquery.flot.time.js   (ca22a1cb)
+2020-09-17T15:06:00.9200883+07:00 0HM2QRP725N5K:00000001 [INF] Sending file. Request path: '"/admin/vendors/Flot/jquery.flot.time.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\Flot\jquery.flot.time.js"' (27b0a520)
+2020-09-17T15:06:01.0433305+07:00 0HM2QRP725N5G:00000001 [INF] Request finished in 2166.4919ms 200 application/javascript (791a596a)
+2020-09-17T15:06:01.0502859+07:00 0HM2QRP725N5Q:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/flot.orderbars/js/jquery.flot.orderBars.js   (ca22a1cb)
+2020-09-17T15:06:01.0675139+07:00 0HM2QRP725N5S:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/build/js/custom.min.js   (ca22a1cb)
+2020-09-17T15:06:01.0713856+07:00 0HM2QRP725N5Q:00000001 [INF] Sending file. Request path: '"/admin/vendors/flot.orderbars/js/jquery.flot.orderBars.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\flot.orderbars\js\jquery.flot.orderBars.js"' (27b0a520)
+2020-09-17T15:06:01.0881834+07:00 0HM2QRP725N5S:00000001 [INF] Sending file. Request path: '"/admin/build/js/custom.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\build\js\custom.min.js"' (27b0a520)
+2020-09-17T15:06:01.1035510+07:00 0HM2QRP725N5R:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/DateJS/build/date.js   (ca22a1cb)
+2020-09-17T15:06:01.1109527+07:00 0HM2QRP725N5T:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js   (ca22a1cb)
+2020-09-17T15:06:01.1348235+07:00 0HM2QRP725N5R:00000001 [INF] Sending file. Request path: '"/admin/vendors/DateJS/build/date.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\DateJS\build\date.js"' (27b0a520)
+2020-09-17T15:06:01.3563115+07:00 0HM2QRP725N5T:00000001 [INF] Sending file. Request path: '"/admin/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\datatables.net-responsive-bs\js\responsive.bootstrap.js"' (27b0a520)
+2020-09-17T15:06:01.5891363+07:00 0HM2QRP725N5Q:00000001 [INF] Request finished in 106.2981ms 200 application/javascript (791a596a)
+2020-09-17T15:06:01.5970316+07:00 0HM2QRP725N5J:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/datatables.net-buttons/js/buttons.flash.min.js   (ca22a1cb)
+2020-09-17T15:06:01.6382167+07:00 0HM2QRP725N5J:00000001 [INF] Sending file. Request path: '"/admin/vendors/datatables.net-buttons/js/buttons.flash.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\datatables.net-buttons\js\buttons.flash.min.js"' (27b0a520)
+2020-09-17T15:06:01.6762201+07:00 0HM2QRP725N5U:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/datatables.net-buttons/js/buttons.html5.min.js   (ca22a1cb)
+2020-09-17T15:06:01.7516130+07:00 0HM2QRP725N5T:00000001 [INF] Request finished in 408.4182ms 200 application/javascript (791a596a)
+2020-09-17T15:06:01.7560407+07:00 0HM2QRP725N5U:00000001 [INF] Sending file. Request path: '"/admin/vendors/datatables.net-buttons/js/buttons.html5.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\datatables.net-buttons\js\buttons.html5.min.js"' (27b0a520)
+2020-09-17T15:06:01.7649104+07:00 0HM2QRP725N56:00000002 [INF] Request finished in 3025.2209ms 200 application/javascript (791a596a)
+2020-09-17T15:06:01.7767307+07:00 0HM2QRP725N5V:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/Flot/jquery.flot.stack.js   (ca22a1cb)
+2020-09-17T15:06:01.8094055+07:00 0HM2QRP725N60:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/pdfmake/build/pdfmake.min.js   (ca22a1cb)
+2020-09-17T15:06:01.8155474+07:00 0HM2QRP725N5V:00000001 [INF] Sending file. Request path: '"/admin/vendors/Flot/jquery.flot.stack.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\Flot\jquery.flot.stack.js"' (27b0a520)
+2020-09-17T15:06:01.8305637+07:00 0HM2QRP725N60:00000001 [INF] Sending file. Request path: '"/admin/vendors/pdfmake/build/pdfmake.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\pdfmake\build\pdfmake.min.js"' (27b0a520)
+2020-09-17T15:06:01.8914923+07:00 0HM2QRP725N5V:00000001 [INF] Request finished in 102.9823ms 200 application/javascript (791a596a)
+2020-09-17T15:06:01.9306354+07:00 0HM2QRP725N61:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/Flot/jquery.flot.js   (ca22a1cb)
+2020-09-17T15:06:01.9934289+07:00 0HM2QRP725N61:00000001 [INF] Sending file. Request path: '"/admin/vendors/Flot/jquery.flot.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\Flot\jquery.flot.js"' (27b0a520)
+2020-09-17T15:06:02.3671049+07:00 0HM2QRP725N5J:00000001 [INF] Request finished in 758.5083ms 200 application/javascript (791a596a)
+2020-09-17T15:06:02.3695304+07:00 0HM2QRP725N5U:00000001 [INF] Request finished in 678.5241ms 200 application/javascript (791a596a)
+2020-09-17T15:06:02.3877413+07:00 0HM2QRP725N62:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/datatables.net-responsive/js/dataTables.responsive.min.js   (ca22a1cb)
+2020-09-17T15:06:02.4246992+07:00 0HM2QRP725N65:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/flot.curvedlines/curvedLines.js   (ca22a1cb)
+2020-09-17T15:06:02.4311407+07:00 0HM2QRP725N62:00000001 [INF] Sending file. Request path: '"/admin/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\datatables.net-responsive\js\dataTables.responsive.min.js"' (27b0a520)
+2020-09-17T15:06:02.4425375+07:00 0HM2QRP725N64:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js   (ca22a1cb)
+2020-09-17T15:06:02.4468573+07:00 0HM2QRP725N65:00000001 [INF] Sending file. Request path: '"/admin/vendors/flot.curvedlines/curvedLines.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\flot.curvedlines\curvedLines.js"' (27b0a520)
+2020-09-17T15:06:02.4725029+07:00 0HM2QRP725N64:00000001 [INF] Sending file. Request path: '"/admin/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\jqvmap\examples\js\jquery.vmap.sampledata.js"' (27b0a520)
+2020-09-17T15:06:02.4801269+07:00 0HM2QRP725N63:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js   (ca22a1cb)
+2020-09-17T15:06:02.5462708+07:00 0HM2QRP725N63:00000001 [INF] Sending file. Request path: '"/admin/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\datatables.net-keytable\js\dataTables.keyTable.min.js"' (27b0a520)
+2020-09-17T15:06:02.6015028+07:00 0HM2QRP725N65:00000001 [INF] Request finished in 158.7154ms 200 application/javascript (791a596a)
+2020-09-17T15:06:02.6042503+07:00 0HM2QRP725N64:00000001 [INF] Request finished in 164.9039ms 200 application/javascript (791a596a)
+2020-09-17T15:06:02.6711978+07:00 0HM2QRP725N66:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/Flot/jquery.flot.resize.js   (ca22a1cb)
+2020-09-17T15:06:02.6769547+07:00 0HM2QRP725N67:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/jqvmap/dist/maps/jquery.vmap.world.js   (ca22a1cb)
+2020-09-17T15:06:02.7288676+07:00 0HM2QRP725N66:00000001 [INF] Sending file. Request path: '"/admin/vendors/Flot/jquery.flot.resize.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\Flot\jquery.flot.resize.js"' (27b0a520)
+2020-09-17T15:06:02.7567737+07:00 0HM2QRP725N67:00000001 [INF] Sending file. Request path: '"/admin/vendors/jqvmap/dist/maps/jquery.vmap.world.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\jqvmap\dist\maps\jquery.vmap.world.js"' (27b0a520)
+2020-09-17T15:06:02.8077398+07:00 0HM2QRP725N62:00000001 [INF] Request finished in 479.1279ms 200 application/javascript (791a596a)
+2020-09-17T15:06:02.8304262+07:00 0HM2QRP725N63:00000001 [INF] Request finished in 395.7783ms 200 application/javascript (791a596a)
+2020-09-17T15:06:02.8633115+07:00 0HM2QRP725N68:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/bootstrap-daterangepicker/daterangepicker.js   (ca22a1cb)
+2020-09-17T15:06:02.8699115+07:00 0HM2QRP725N66:00000001 [INF] Request finished in 223.3713ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.1414854+07:00 0HM2QRP725N5P:00000001 [INF] Request finished in 2581.2402ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.1708268+07:00 0HM2QRP725N5O:00000001 [INF] Request finished in 2730.4558ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.2736766+07:00 0HM2QRP725N61:00000001 [INF] Request finished in 1289.2306ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.2824873+07:00 0HM2QRP725N5S:00000001 [INF] Request finished in 2160.7321ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.3131142+07:00 0HM2QRP725N6A:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/vendors/flot-spline/js/jquery.flot.spline.min.js   (ca22a1cb)
+2020-09-17T15:06:03.3354674+07:00 0HM2QRP725N5I:00000001 [INF] Request finished in 4304.5147ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.3401205+07:00 0HM2QRP725N5R:00000001 [INF] Request finished in 2285.2327ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.3906713+07:00 0HM2QRP725N6A:00000001 [INF] Sending file. Request path: '"/admin/vendors/flot-spline/js/jquery.flot.spline.min.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\flot-spline\js\jquery.flot.spline.min.js"' (27b0a520)
+2020-09-17T15:06:03.3949321+07:00 0HM2QRP725N55:00000002 [INF] Request finished in 5062.3397ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.4208801+07:00 0HM2QRP725N58:00000002 [INF] Request finished in 4554.3161ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.4902430+07:00 0HM2QRP725N5N:00000001 [INF] Request finished in 3710.3604ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.4945991+07:00 0HM2QRP725N60:00000001 [INF] Request finished in 1677.8214ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.5133266+07:00 0HM2QRP725N6A:00000001 [INF] Request finished in 531.5006ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.5199314+07:00 0HM2QRP725N54:00000002 [INF] Request finished in 4706.7992ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.5443307+07:00 0HM2QRP725N5H:00000001 [INF] Request finished in 3886.9928ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.5514839+07:00 0HM2QRP725N5E:00000001 [INF] Request finished in 4396.1033ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.5734292+07:00 0HM2QRP725N5C:00000001 [INF] Request finished in 4394.1083ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.5782411+07:00 0HM2QRP725N5D:00000001 [INF] Request finished in 4410.3552ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.6217810+07:00 0HM2QRP725N5A:00000002 [INF] Request finished in 4479.4638ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.6369690+07:00 0HM2QRP725N57:00000002 [INF] Request finished in 4837.8057ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.6749170+07:00 0HM2QRP725N69:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/images/img.jpg   (ca22a1cb)
+2020-09-17T15:06:03.6785592+07:00 0HM2QRP725N5K:00000001 [INF] Request finished in 3809.4157ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.6943313+07:00 0HM2QRP725N69:00000001 [INF] Sending file. Request path: '"/admin/images/img.jpg"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\images\img.jpg"' (27b0a520)
+2020-09-17T15:06:03.7384404+07:00 0HM2QRP725N68:00000001 [INF] Sending file. Request path: '"/admin/vendors/bootstrap-daterangepicker/daterangepicker.js"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\vendors\bootstrap-daterangepicker\daterangepicker.js"' (27b0a520)
+2020-09-17T15:06:03.7646870+07:00 0HM2QRP725N67:00000001 [INF] Request finished in 260.5101ms 200 application/javascript (791a596a)
+2020-09-17T15:06:03.8148130+07:00 0HM2QRP725N69:00000001 [INF] Request finished in 908.0034ms 200 image/jpeg (791a596a)
+2020-09-17T15:06:03.8680302+07:00 0HM2QRP725N68:00000001 [INF] Request finished in 1000.6096ms 200 application/javascript (791a596a)
+2020-09-17T15:06:04.0920522+07:00 0HM2QRP725N53:00000005 [INF] Request starting HTTP/1.1 GET http://localhost:44340/admin/images/favicon.ico   (ca22a1cb)
+2020-09-17T15:06:04.0993414+07:00 0HM2QRP725N53:00000005 [INF] Sending file. Request path: '"/admin/images/favicon.ico"'. Physical path: '"D:\Git-Project\ShopMartWebsite\ShopMartWebsite\wwwroot\admin\images\favicon.ico"' (27b0a520)
+2020-09-17T15:06:04.2567341+07:00 0HM2QRP725N53:00000005 [INF] Request finished in 106.9408ms 200 image/x-icon (791a596a)
+2020-09-17T15:06:06.4982236+07:00 0HM2QRP725N59:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44340/Chart   (ca22a1cb)
+2020-09-17T15:06:06.5365090+07:00 0HM2QRP725N59:00000003 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2020-09-17T15:06:06.7563716+07:00 0HM2QRP725N59:00000003 [INF] Authorization was successful for user: "admin". (d7eb274a)
+2020-09-17T15:06:06.7700210+07:00 0HM2QRP725N59:00000003 [INF] Executing action method "ShopMartWebsite.Controllers.ChartController.Index (ShopMartWebsite)" with arguments (["", "", ""]) - ModelState is Valid (ba7f4ac2)
+2020-09-17T15:06:06.8146924+07:00 0HM2QRP725N59:00000003 [INF] Entity Framework Core "2.2.0-rtm-35687" initialized '"ShopDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-09-17T15:06:07.1458290+07:00 0HM2QRP725N59:00000003 [INF] Executed DbCommand ("143"ms) [Parameters=["@__monthSearch_0='?' (DbType = Int32), @__yearSearch_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT CONVERT(date, [o].[createDate]) AS [Key], COUNT(*) AS [Count], SUM([o].[total]) AS [Total]
+FROM [order] AS [o]
+GROUP BY CONVERT(date, [o].[createDate])
+HAVING (DATEPART(month, CONVERT(date, [o].[createDate])) = @__monthSearch_0) AND (DATEPART(year, CONVERT(date, [o].[createDate])) = @__yearSearch_1)" (0723d8ff)
+2020-09-17T15:06:08.1535440+07:00 0HM2QRP725N59:00000003 [INF] Executing ViewResult, running view at path "/Views/Chart/Index.cshtml". (9707eebe)
+2020-09-17T15:06:09.0392350+07:00 0HM2QRP725N59:00000003 [INF] Executed action "ShopMartWebsite.Controllers.ChartController.Index (ShopMartWebsite)" in 2390.0998ms (afa2e885)
+2020-09-17T15:06:09.1425059+07:00 0HM2QRP725N59:00000003 [INF] Request finished in 2549.9969ms 200 text/html; charset=utf-8 (791a596a)
+2020-09-17T15:06:10.0470260+07:00 0HM2QRP725N5F:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/Chart/ColumnChart?option=dayinmonth&monthSearch=9&yearSearch=2020   (ca22a1cb)
+2020-09-17T15:06:10.0644193+07:00 0HM2QRP725N5F:00000002 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2020-09-17T15:06:10.0880731+07:00 0HM2QRP725N5F:00000002 [INF] Authorization was successful for user: "admin". (d7eb274a)
+2020-09-17T15:06:10.1024445+07:00 0HM2QRP725N5F:00000002 [INF] Executing action method "ShopMartWebsite.Controllers.ChartController.ColumnChart (ShopMartWebsite)" with arguments (["dayinmonth", "9", "2020"]) - ModelState is Valid (ba7f4ac2)
+2020-09-17T15:06:10.1190983+07:00 0HM2QRP725N5F:00000002 [INF] Entity Framework Core "2.2.0-rtm-35687" initialized '"ShopDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-09-17T15:06:10.1378425+07:00 0HM2QRP725N5F:00000002 [INF] Executed DbCommand ("6"ms) [Parameters=["@__monthSearch_0='?' (DbType = Int32), @__yearSearch_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT CONVERT(date, [o].[createDate]) AS [Key], COUNT(*) AS [Count], SUM([o].[total]) AS [Total]
+FROM [order] AS [o]
+GROUP BY CONVERT(date, [o].[createDate])
+HAVING (DATEPART(month, CONVERT(date, [o].[createDate])) = @__monthSearch_0) AND (DATEPART(year, CONVERT(date, [o].[createDate])) = @__yearSearch_1)" (0723d8ff)
+2020-09-17T15:06:10.1508214+07:00 0HM2QRP725N5F:00000002 [INF] Executing JsonResult, writing value "System.Collections.Generic.List`1[ShopMartWebsite.Entities.Statistical]". (7bb75e80)
+2020-09-17T15:06:10.4448335+07:00 0HM2QRP725N5F:00000002 [INF] Executed action "ShopMartWebsite.Controllers.ChartController.ColumnChart (ShopMartWebsite)" in 306.4981ms (afa2e885)
+2020-09-17T15:06:10.5641139+07:00 0HM2QRP725N5F:00000002 [INF] Request finished in 422.2768ms 200 application/json; charset=utf-8 (791a596a)
+2020-09-17T15:06:15.1166744+07:00 0HM2QRP725N5B:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44340/Category   (ca22a1cb)
+2020-09-17T15:06:15.1268199+07:00 0HM2QRP725N5B:00000003 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2020-09-17T15:06:15.1410010+07:00 0HM2QRP725N5B:00000003 [INF] Authorization was successful for user: "admin". (d7eb274a)
+2020-09-17T15:06:15.1517259+07:00 0HM2QRP725N5B:00000003 [INF] Executing action method "ShopMartWebsite.Controllers.CategoryController.Index (ShopMartWebsite)" with arguments (["", ""]) - ModelState is Valid (ba7f4ac2)
+2020-09-17T15:06:15.1697711+07:00 0HM2QRP725N5B:00000003 [INF] Entity Framework Core "2.2.0-rtm-35687" initialized '"ShopDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-09-17T15:06:15.2530911+07:00 0HM2QRP725N5B:00000003 [INF] Executed DbCommand ("36"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[id], [x].[name], [x].[status]
+FROM [category] AS [x]
+WHERE [x].[status] = 1
+ORDER BY [x].[id]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2020-09-17T15:06:15.3779387+07:00 0HM2QRP725N5B:00000003 [INF] Executed DbCommand ("103"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [x.Products].[id], [x.Products].[amount], [x.Products].[categoryId], [x.Products].[color], [x.Products].[description], [x.Products].[image], [x.Products].[name], [x.Products].[price], [x.Products].[size], [x.Products].[status]
+FROM [product] AS [x.Products]
+INNER JOIN (
+    SELECT [x0].[id]
+    FROM [category] AS [x0]
+    WHERE [x0].[status] = 1
+    ORDER BY [x0].[id]
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t] ON [x.Products].[categoryId] = [t].[id]
+ORDER BY [t].[id]" (0723d8ff)
+2020-09-17T15:06:15.4390950+07:00 0HM2QRP725N5B:00000003 [INF] Executed DbCommand ("35"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [category] AS [x]
+WHERE [x].[status] = 1" (0723d8ff)
+2020-09-17T15:06:15.8931656+07:00 0HM2QRP725N5B:00000003 [INF] Executing ViewResult, running view at path "/Views/Category/Index.cshtml". (9707eebe)
+2020-09-17T15:06:16.8579709+07:00 0HM2QRP725N5B:00000003 [INF] Executed action "ShopMartWebsite.Controllers.CategoryController.Index (ShopMartWebsite)" in 1712.0606ms (afa2e885)
+2020-09-17T15:06:16.9328395+07:00 0HM2QRP725N5B:00000003 [INF] Request finished in 1753.2416ms 200 text/html; charset=utf-8 (791a596a)
+2020-09-17T15:06:21.8518595+07:00 0HM2QRP725N5L:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/Category/Action/1?page=1   (ca22a1cb)
+2020-09-17T15:06:21.8623687+07:00 0HM2QRP725N5L:00000002 [INF] AuthenticationScheme: "Identity.Application" was successfully authenticated. (1805f3b3)
+2020-09-17T15:06:21.8941722+07:00 0HM2QRP725N5L:00000002 [INF] Authorization was successful for user: "admin". (d7eb274a)
+2020-09-17T15:06:21.9082606+07:00 0HM2QRP725N5L:00000002 [INF] Executing action method "ShopMartWebsite.Controllers.CategoryController.Action (ShopMartWebsite)" with arguments (["1"]) - ModelState is Valid (ba7f4ac2)
+2020-09-17T15:06:21.9541626+07:00 0HM2QRP725N5L:00000002 [INF] Entity Framework Core "2.2.0-rtm-35687" initialized '"ShopDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-09-17T15:06:22.0233071+07:00 0HM2QRP725N5L:00000002 [INF] Executed DbCommand ("5"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [pro].[id], [pro].[name], [pro].[status]
+FROM [category] AS [pro]
+WHERE [pro].[id] = @__id_0
+ORDER BY [pro].[id]" (0723d8ff)
+2020-09-17T15:06:22.0472729+07:00 0HM2QRP725N5L:00000002 [INF] Executed DbCommand ("9"ms) [Parameters=["@__id_0='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [pro.Products].[id], [pro.Products].[amount], [pro.Products].[categoryId], [pro.Products].[color], [pro.Products].[description], [pro.Products].[image], [pro.Products].[name], [pro.Products].[price], [pro.Products].[size], [pro.Products].[status]
+FROM [product] AS [pro.Products]
+INNER JOIN (
+    SELECT TOP(1) [pro0].[id]
+    FROM [category] AS [pro0]
+    WHERE [pro0].[id] = @__id_0
+    ORDER BY [pro0].[id]
+) AS [t] ON [pro.Products].[categoryId] = [t].[id]
+ORDER BY [t].[id]" (0723d8ff)
+2020-09-17T15:06:22.5500529+07:00 0HM2QRP725N5L:00000002 [INF] Executing PartialViewResult, running view at path "/Views/Category/_Action.cshtml". (6b910aca)
+2020-09-17T15:06:22.5995770+07:00 0HM2QRP725N5L:00000002 [INF] Executed action "ShopMartWebsite.Controllers.CategoryController.Action (ShopMartWebsite)" in 686.1168ms (afa2e885)
+2020-09-17T15:06:22.6629738+07:00 0HM2QRP725N5L:00000002 [INF] Request finished in 757.5583ms 200 text/html; charset=utf-8 (791a596a)
+2020-09-17T16:06:40.2616843+07:00  [INF] Entity Framework Core "2.2.0-rtm-35687" initialized '"ShopDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-09-17T16:06:43.2339391+07:00  [INF] Executed DbCommand ("1,679"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE') SELECT 1 ELSE SELECT 0" (0723d8ff)
+2020-09-17T16:06:44.6917866+07:00  [INF] Executed DbCommand ("346"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [AspNetRoles] AS [a])
+    THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT)
+END" (0723d8ff)
+2020-09-17T16:06:45.0976106+07:00  [INF] Executed DbCommand ("71"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [AspNetUsers] AS [u]
+        WHERE [u].[UserName] = N'admin')
+    THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT)
+END" (0723d8ff)
+2020-09-17T16:06:46.6812663+07:00 0HM2QT40BTLLN:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/   (ca22a1cb)
+2020-09-17T16:06:46.6813844+07:00 0HM2QT40BTLLO:00000001 [INF] Request starting HTTP/1.1 DEBUG http://localhost:51987/  0 (ca22a1cb)
+2020-09-17T16:06:47.2073455+07:00 0HM2QT40BTLLO:00000001 [INF] Request finished in 578.4813ms 200  (791a596a)
+2020-09-17T16:06:47.6214559+07:00 0HM2QT40BTLLN:00000001 [INF] "Identity.Application" was not authenticated. Failure message: "Unprotect ticket failed" (48071232)
+2020-09-17T16:06:49.2515203+07:00 0HM2QT40BTLLN:00000001 [INF] Executing action method "ShopMartWebsite.Controllers.HomeController.Index (ShopMartWebsite)" with arguments (["", "", ""]) - ModelState is Valid (ba7f4ac2)
+2020-09-17T16:06:49.2914611+07:00 0HM2QT40BTLLN:00000001 [INF] Entity Framework Core "2.2.0-rtm-35687" initialized '"ShopDbContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-09-17T16:06:50.9588732+07:00 0HM2QT40BTLLN:00000001 [INF] Executed DbCommand ("309"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [x].[id], [x].[amount], [x].[categoryId], [x].[color], [x].[description], [x].[image], [x].[name], [x].[price], [x].[size], [x].[status], [x.category].[id], [x.category].[name], [x.category].[status]
+FROM [product] AS [x]
+LEFT JOIN [category] AS [x.category] ON [x].[categoryId] = [x.category].[id]
+WHERE ([x].[status] = 1) AND ([x].[amount] > 0)
+ORDER BY [x].[categoryId], [x].[id]
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY" (0723d8ff)
+2020-09-17T16:06:51.5055204+07:00 0HM2QT40BTLLN:00000001 [INF] Executed DbCommand ("24"ms) [Parameters=["@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)"], CommandType='Text', CommandTimeout='30']"
+""SELECT [x.Comments].[id], [x.Comments].[content], [x.Comments].[createDate], [x.Comments].[productId], [x.Comments].[status], [x.Comments].[userId]
+FROM [comment] AS [x.Comments]
+INNER JOIN (
+    SELECT DISTINCT [t].*
+    FROM (
+        SELECT [x0].[id], [x0].[categoryId]
+        FROM [product] AS [x0]
+        LEFT JOIN [category] AS [x.category0] ON [x0].[categoryId] = [x.category0].[id]
+        WHERE ([x0].[status] = 1) AND ([x0].[amount] > 0)
+        ORDER BY [x0].[categoryId], [x0].[id]
+        OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+    ) AS [t]
+) AS [t0] ON [x.Comments].[productId] = [t0].[id]
+ORDER BY [t0].[categoryId], [t0].[id]" (0723d8ff)
+2020-09-17T16:06:51.7475195+07:00 0HM2QT40BTLLN:00000001 [INF] Executed DbCommand ("123"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [product] AS [x]
+WHERE ([x].[status] = 1) AND ([x].[amount] > 0)" (0723d8ff)
+2020-09-17T16:07:17.7641882+07:00 0HM2QT40BTLLN:00000001 [INF] Executing ViewResult, running view at path "/Views/Home/Index.cshtml". (9707eebe)
+2020-09-17T16:07:19.3178350+07:00 0HM2QT40BTLLN:00000001 [INF] Executed DbCommand ("1,039"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [cate].[id], [cate].[name], [cate].[status]
+FROM [category] AS [cate]
+ORDER BY [cate].[id]" (0723d8ff)
+2020-09-17T16:07:19.5284910+07:00 0HM2QT40BTLLN:00000001 [INF] Executed DbCommand ("164"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [cate.Products].[id], [cate.Products].[amount], [cate.Products].[categoryId], [cate.Products].[color], [cate.Products].[description], [cate.Products].[image], [cate.Products].[name], [cate.Products].[price], [cate.Products].[size], [cate.Products].[status]
+FROM [product] AS [cate.Products]
+INNER JOIN (
+    SELECT [cate0].[id]
+    FROM [category] AS [cate0]
+) AS [t] ON [cate.Products].[categoryId] = [t].[id]
+ORDER BY [t].[id]" (0723d8ff)
+2020-09-17T16:07:20.1617871+07:00 0HM2QT40BTLLN:00000001 [INF] Executed DbCommand ("11"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [cate].[id], [cate].[name], [cate].[status]
+FROM [category] AS [cate]
+ORDER BY [cate].[id]" (0723d8ff)
+2020-09-17T16:07:20.2493497+07:00 0HM2QT40BTLLN:00000001 [INF] Executed DbCommand ("26"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT [cate.Products].[id], [cate.Products].[amount], [cate.Products].[categoryId], [cate.Products].[color], [cate.Products].[description], [cate.Products].[image], [cate.Products].[name], [cate.Products].[price], [cate.Products].[size], [cate.Products].[status]
+FROM [product] AS [cate.Products]
+INNER JOIN (
+    SELECT [cate0].[id]
+    FROM [category] AS [cate0]
+) AS [t] ON [cate.Products].[categoryId] = [t].[id]
+ORDER BY [t].[id]" (0723d8ff)
+2020-09-17T16:07:21.6061283+07:00 0HM2QT40BTLLN:00000001 [INF] Executed action "ShopMartWebsite.Controllers.HomeController.Index (ShopMartWebsite)" in 32678.9033ms (afa2e885)
+2020-09-17T16:07:21.8700563+07:00 0HM2QT40BTLLN:00000001 [INF] Request finished in 35166.8277ms 200 text/html; charset=utf-8 (791a596a)
+2020-09-17T16:07:22.0662088+07:00 0HM2QT40BTLLO:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/css/detailproduct.css   (ca22a1cb)
+2020-09-17T16:07:22.0726724+07:00 0HM2QT40BTLLN:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/css/fonts.css   (ca22a1cb)
+2020-09-17T16:07:22.1213156+07:00 0HM2QT40BTLLP:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/css/cart.css   (ca22a1cb)
+2020-09-17T16:07:22.2018841+07:00 0HM2QT40BTLLN:00000002 [INF] Sending file. Request path: '"/user/css/fonts.css"'. Physical path: '"D:\Git-TLCN\TLCN-Websitebanhang\ShopMartWebsite\ShopMartWebsite\wwwroot\user\css\fonts.css"' (27b0a520)
+2020-09-17T16:07:22.2234647+07:00 0HM2QT40BTLLO:00000002 [INF] Sending file. Request path: '"/user/css/detailproduct.css"'. Physical path: '"D:\Git-TLCN\TLCN-Websitebanhang\ShopMartWebsite\ShopMartWebsite\wwwroot\user\css\detailproduct.css"' (27b0a520)
+2020-09-17T16:07:22.3519742+07:00 0HM2QT40BTLLP:00000001 [INF] Sending file. Request path: '"/user/css/cart.css"'. Physical path: '"D:\Git-TLCN\TLCN-Websitebanhang\ShopMartWebsite\ShopMartWebsite\wwwroot\user\css\cart.css"' (27b0a520)
+2020-09-17T16:07:22.7065190+07:00 0HM2QT40BTLLN:00000002 [INF] Request finished in 347.7008ms 200 text/css (791a596a)
+2020-09-17T16:07:23.2102091+07:00 0HM2QT40BTLLP:00000001 [INF] Request finished in 346.41ms 200 text/css (791a596a)
+2020-09-17T16:07:23.2540481+07:00 0HM2QT40BTLLN:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/js/owl.carousel.min.js   (ca22a1cb)
+2020-09-17T16:07:23.2589295+07:00 0HM2QT40BTLLR:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/instagram/anh1.jpg   (ca22a1cb)
+2020-09-17T16:07:23.2717838+07:00 0HM2QT40BTLLP:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/js/main.js   (ca22a1cb)
+2020-09-17T16:07:23.3176940+07:00 0HM2QT40BTLLR:00000001 [INF] Sending file. Request path: '"/user/assets/instagram/anh1.jpg"'. Physical path: '"D:\Git-TLCN\TLCN-Websitebanhang\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\instagram\anh1.jpg"' (27b0a520)
+2020-09-17T16:07:23.3217863+07:00 0HM2QT40BTLLN:00000003 [INF] Sending file. Request path: '"/user/js/owl.carousel.min.js"'. Physical path: '"D:\Git-TLCN\TLCN-Websitebanhang\ShopMartWebsite\ShopMartWebsite\wwwroot\user\js\owl.carousel.min.js"' (27b0a520)
+2020-09-17T16:07:24.9819558+07:00 0HM2QT40BTLLP:00000002 [INF] Sending file. Request path: '"/user/js/main.js"'. Physical path: '"D:\Git-TLCN\TLCN-Websitebanhang\ShopMartWebsite\ShopMartWebsite\wwwroot\user\js\main.js"' (27b0a520)
+2020-09-17T16:07:24.9865155+07:00 0HM2QT40BTLLQ:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/js/bootstrap.js   (ca22a1cb)
+2020-09-17T16:07:25.0056834+07:00 0HM2QT40BTLLO:00000002 [INF] Request finished in 347.6994ms 200 text/css (791a596a)
+2020-09-17T16:07:27.1449610+07:00 0HM2QT40BTLLQ:00000001 [INF] Sending file. Request path: '"/user/js/bootstrap.js"'. Physical path: '"D:\Git-TLCN\TLCN-Websitebanhang\ShopMartWebsite\ShopMartWebsite\wwwroot\user\js\bootstrap.js"' (27b0a520)
+2020-09-17T16:07:27.1477058+07:00 0HM2QT40BTLLR:00000001 [INF] Request finished in 3934.2525ms 200 image/jpeg (791a596a)
+2020-09-17T16:07:27.1719556+07:00 0HM2QT40BTLLS:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/logo/logo.jpg   (ca22a1cb)
+2020-09-17T16:07:27.1804885+07:00 0HM2QT40BTLLO:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/js/jquery3.4.1.min.js   (ca22a1cb)
+2020-09-17T16:07:27.1852003+07:00 0HM2QT40BTLLU:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/js/slick.min.js   (ca22a1cb)
+2020-09-17T16:07:27.2030990+07:00 0HM2QT40BTLLO:00000003 [INF] Sending file. Request path: '"/user/js/jquery3.4.1.min.js"'. Physical path: '"D:\Git-TLCN\TLCN-Websitebanhang\ShopMartWebsite\ShopMartWebsite\wwwroot\user\js\jquery3.4.1.min.js"' (27b0a520)
+2020-09-17T16:07:27.6890866+07:00 0HM2QT40BTLLU:00000001 [INF] Sending file. Request path: '"/user/js/slick.min.js"'. Physical path: '"D:\Git-TLCN\TLCN-Websitebanhang\ShopMartWebsite\ShopMartWebsite\wwwroot\user\js\slick.min.js"' (27b0a520)
+2020-09-17T16:07:27.6944431+07:00 0HM2QT40BTLLS:00000001 [INF] Sending file. Request path: '"/user/assets/logo/logo.jpg"'. Physical path: '"D:\Git-TLCN\TLCN-Websitebanhang\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\logo\logo.jpg"' (27b0a520)
+2020-09-17T16:07:28.1810249+07:00 0HM2QT40BTLLT:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/js/aos.js   (ca22a1cb)
+2020-09-17T16:07:28.2022061+07:00 0HM2QT40BTLM0:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/instagram/anh11.jpg   (ca22a1cb)
+2020-09-17T16:07:28.2054017+07:00 0HM2QT40BTLLT:00000001 [INF] Sending file. Request path: '"/user/js/aos.js"'. Physical path: '"D:\Git-TLCN\TLCN-Websitebanhang\ShopMartWebsite\ShopMartWebsite\wwwroot\user\js\aos.js"' (27b0a520)
+2020-09-17T16:07:28.6657859+07:00 0HM2QT40BTLM0:00000001 [INF] Sending file. Request path: '"/user/assets/instagram/anh11.jpg"'. Physical path: '"D:\Git-TLCN\TLCN-Websitebanhang\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\instagram\anh11.jpg"' (27b0a520)
+2020-09-17T16:07:30.8717869+07:00 0HM2QT40BTLM1:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/instagram/anh66.jpg   (ca22a1cb)
+2020-09-17T16:07:30.8766365+07:00 0HM2QT40BTLLN:00000003 [INF] Request finished in 6661.9081ms 200 application/javascript (791a596a)
+2020-09-17T16:07:30.9172960+07:00 0HM2QT40BTLM1:00000001 [INF] Sending file. Request path: '"/user/assets/instagram/anh66.jpg"'. Physical path: '"D:\Git-TLCN\TLCN-Websitebanhang\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\instagram\anh66.jpg"' (27b0a520)
+2020-09-17T16:07:31.0181941+07:00 0HM2QT40BTLLT:00000001 [INF] Request finished in 3760.9038ms 200 application/javascript (791a596a)
+2020-09-17T16:07:31.0665301+07:00 0HM2QT40BTLM1:00000001 [INF] Request finished in 1246.2616ms 200 image/jpeg (791a596a)
+2020-09-17T16:07:31.0778384+07:00 0HM2QT40BTLLP:00000002 [INF] Request finished in 7588.7413ms 200 application/javascript (791a596a)
+2020-09-17T16:07:31.1296767+07:00 0HM2QT40BTLLR:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/fonts/Lexend_Deca/LexendDeca-Regular.ttf   (ca22a1cb)
+2020-09-17T16:07:31.2017959+07:00 0HM2QT40BTLLR:00000002 [INF] Sending file. Request path: '"/user/fonts/Lexend_Deca/LexendDeca-Regular.ttf"'. Physical path: '"D:\Git-TLCN\TLCN-Websitebanhang\ShopMartWebsite\ShopMartWebsite\wwwroot\user\fonts\Lexend_Deca\LexendDeca-Regular.ttf"' (27b0a520)
+2020-09-17T16:07:31.2239857+07:00 0HM2QT40BTLM0:00000001 [INF] Request finished in 2948.7313ms 200 image/jpeg (791a596a)
+2020-09-17T16:07:31.2646412+07:00 0HM2QT40BTLLO:00000003 [INF] Request finished in 4016.1031ms 200 application/javascript (791a596a)
+2020-09-17T16:07:31.3124317+07:00 0HM2QT40BTLM2:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/instagram/anh55.jpg   (ca22a1cb)
+2020-09-17T16:07:31.8705753+07:00 0HM2QT40BTLLQ:00000001 [INF] Request finished in 8106.597ms 200 application/javascript (791a596a)
+2020-09-17T16:07:31.8726697+07:00 0HM2QT40BTLLR:00000002 [INF] Request finished in 248.9098ms 200 application/x-font-ttf (791a596a)
+2020-09-17T16:07:31.9385152+07:00 0HM2QT40BTLM2:00000001 [INF] Sending file. Request path: '"/user/assets/instagram/anh55.jpg"'. Physical path: '"D:\Git-TLCN\TLCN-Websitebanhang\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\instagram\anh55.jpg"' (27b0a520)
+2020-09-17T16:07:31.9459821+07:00 0HM2QT40BTLLU:00000001 [INF] Request finished in 3732.3785ms 200 application/javascript (791a596a)
+2020-09-17T16:07:31.9501887+07:00 0HM2QT40BTLLS:00000001 [INF] Request finished in 1533.3253ms 200 image/jpeg (791a596a)
+2020-09-17T16:07:32.0222602+07:00 0HM2QT40BTLM2:00000001 [INF] Request finished in 1339.2837ms 200 image/jpeg (791a596a)
+2020-09-17T16:07:32.0359447+07:00 0HM2QT40BTLLS:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/webfonts/fa-brands-400.woff2   (ca22a1cb)
+2020-09-17T16:07:32.0875271+07:00 0HM2QT40BTLLV:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/instagram/anh33.jpg   (ca22a1cb)
+2020-09-17T16:07:32.1392598+07:00 0HM2QT40BTLLS:00000002 [INF] Sending file. Request path: '"/user/webfonts/fa-brands-400.woff2"'. Physical path: '"D:\Git-TLCN\TLCN-Websitebanhang\ShopMartWebsite\ShopMartWebsite\wwwroot\user\webfonts\fa-brands-400.woff2"' (27b0a520)
+2020-09-17T16:07:32.1523936+07:00 0HM2QT40BTLLV:00000001 [INF] Sending file. Request path: '"/user/assets/instagram/anh33.jpg"'. Physical path: '"D:\Git-TLCN\TLCN-Websitebanhang\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\instagram\anh33.jpg"' (27b0a520)
+2020-09-17T16:07:32.1648933+07:00 0HM2QT40BTLM3:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:44340/user/assets/instagram/anh44.jpg   (ca22a1cb)
+2020-09-17T16:07:32.2237180+07:00 0HM2QT40BTLM3:00000001 [INF] Sending file. Request path: '"/user/assets/instagram/anh44.jpg"'. Physical path: '"D:\Git-TLCN\TLCN-Websitebanhang\ShopMartWebsite\ShopMartWebsite\wwwroot\user\assets\instagram\anh44.jpg"' (27b0a520)
+2020-09-17T16:07:32.5400514+07:00 0HM2QT40BTLLV:00000001 [INF] Request finished in 2343.2783ms 200 image/jpeg (791a596a)
+2020-09-17T16:07:32.5460464+07:00 0HM2QT40BTLLS:00000002 [INF] Request finished in 236.3492ms 200 font/woff2 (791a596a)
+2020-09-17T16:07:32.5884201+07:00 0HM2QT40BTLM3:00000001 [INF] Request finished in 1645.8116ms 200 image/jpeg (791a596a)
